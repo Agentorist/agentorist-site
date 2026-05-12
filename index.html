@@ -707,16 +707,8 @@
   </p>
 
   <div class="code-wrap">
-    <div class="code-block" id="serverConfig">
-<span class="comment"># Claude Desktop config — add to mcpServers</span>
-{
-  <span class="string">"mcpServers"</span>: {
-    <span class="string">"agentorist"</span>: {
-      <span class="string">"url"</span>: <span class="string">"https://mcp.agentorist.com/mcp"</span>,
-      <span class="string">"transport"</span>: <span class="string">"streamable-http"</span>
-    }
-  }
-}
+    <div class="code-block" id="serverConfig"><span class="string">https://mcp.agentorist.com/mcp</span>
+<span class="comment">Transport: streamable-http</span>
     </div>
     <button class="copy-btn" id="copyBtn" onclick="copyConfig()">Copy</button>
   </div>
@@ -760,7 +752,7 @@
 
 <script>
   function copyConfig() {
-    const text = '{\n  "mcpServers": {\n    "agentorist": {\n      "url": "https://mcp.agentorist.com/mcp",\n      "transport": "streamable-http"\n    }\n  }\n}';
+    const text = 'https://mcp.agentorist.com/mcp';
     navigator.clipboard.writeText(text).then(() => {
       const btn = document.getElementById('copyBtn');
       btn.textContent = 'Copied!';
