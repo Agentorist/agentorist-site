@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Agentorist</title>
+<meta name="description" content="Get in touch with Agentorist — the booking layer for AI agents.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="agt-mark" viewBox="0 0 100 100">
+    <path fill="currentColor" d="M 50 10 L 63.6 42 L 96 50 L 70.4 58 L 78 76 L 64 76 L 50 56 L 36 76 L 22 76 L 29.6 58 L 4 50 L 36.4 42 Z"/>
+    <path fill="currentColor" d="M 28 44 L 72 44 L 72 56 L 28 56 Z"/>
+    <path fill="currentColor" d="M 47 68 L 53 68 L 50 84 Z"/>
+  </symbol>
+</svg>
+
+<header>
+  <a class="logo" href="index.html"><svg aria-hidden="true"><use href="#agt-mark"/></svg>Agentorist</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="integrate.html">Integrate</a>
+    <a href="data-reports.html">Demand Reports</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<div class="page-body">
+  <div class="section-label">Get in touch</div>
+  <h1>Let's talk.</h1>
+  <p class="lede">
+    Whether you're a venue, an operator, a developer, an investor, or a journalist — drop us a line and we'll get back to you.
+  </p>
+
+  <section>
+    <h3>Direct email</h3>
+    <p>
+      For most enquiries: <a href="mailto:hello@agentorist.com">hello@agentorist.com</a>
+    </p>
+    <p>
+      Partnership and integration: <a href="mailto:partners@agentorist.com">partners@agentorist.com</a>
+    </p>
+    <p>
+      Press and media: <a href="mailto:press@agentorist.com">press@agentorist.com</a>
+    </p>
+  </section>
+
+  <section>
+    <h3>Or send a message</h3>
+    <form class="form" name="contact" data-netlify="true" method="post">
+      <div class="row row-2">
+        <div class="row">
+          <label for="name">Your name <span class="req">*</span></label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="row">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" required>
+        </div>
+      </div>
+      <div class="row">
+        <label for="company">Company / venue (optional)</label>
+        <input type="text" id="company" name="company">
+      </div>
+      <div class="row">
+        <label for="reason">What's this about? <span class="req">*</span></label>
+        <select id="reason" name="reason" required>
+          <option value="">— Choose one —</option>
+          <option value="partnership">Partnership / integration</option>
+          <option value="operator">I'm a venue / operator</option>
+          <option value="developer">Developer / agent platform</option>
+          <option value="investor">Investor enquiry</option>
+          <option value="press">Press / media</option>
+          <option value="other">Something else</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="message">Message <span class="req">*</span></label>
+        <textarea id="message" name="message" placeholder="What's on your mind?" required></textarea>
+      </div>
+      <div class="submit-row">
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <span class="help">We typically reply within two business days.</span>
+      </div>
+    </form>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="logo footer-logo"><svg aria-hidden="true"><use href="#agt-mark"/></svg>Agentorist</div>
+      <p class="footer-tagline">The AI-agent-native booking gateway. Search. Compare. Book. All from inside the conversation.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <a href="index.html#how">How it works</a>
+      <a href="index.html#verticals">What we book</a>
+      <a href="index.html#developers">For developers</a>
+    </div>
+    <div>
+      <h4>Partners</h4>
+      <a href="integrate.html">Integrate</a>
+      <a href="data-reports.html">Demand reports</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>© 2026 Agentorist</span>
+    <span>This product uses the TMDB API but is not endorsed or certified by TMDB.</span>
+  </div>
+</footer>
+
+</body>
+</html>

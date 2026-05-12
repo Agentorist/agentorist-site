@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Agentorist">
+  <title>Agentorist</title>
+  <!-- A silhouette with E and W needles as integrated extensions of the crossbar zone -->
+  <path fill="currentColor" d="
+    M 50 10
+    L 63.6 42
+    L 96 50
+    L 70.4 58
+    L 78 76
+    L 64 76
+    L 50 56
+    L 36 76
+    L 22 76
+    L 29.6 58
+    L 4 50
+    L 36.4 42
+    Z
+  "/>
+  <!-- Crossbar (the bar of the A; merges with E and W needles) -->
+  <path fill="currentColor" d="M 28 44 L 72 44 L 72 56 L 28 56 Z"/>
+  <!-- S needle: inside V notch, protruding below the base -->
+  <path fill="currentColor" d="M 47 68 L 53 68 L 50 84 Z"/>
+</svg>

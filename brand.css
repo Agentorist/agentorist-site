@@ -1,0 +1,325 @@
+/* Agentorist shared brand styles.
+   Imported by every page in /site so the header, footer, typography, and
+   colour palette stay consistent. Page-specific styles live inline in each
+   HTML file. */
+
+:root {
+  --ink: #0a0908;
+  --paper: #f8f7f3;          /* less off-white, between cream and pure white */
+  --forest: #1d7a3f;         /* primary brand accent — brighter forest */
+  --gold: #d4a017;
+  --line: #1a1614;
+  --muted: #6b6258;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--paper); color: var(--ink); }
+body {
+  font-family: 'Bodoni Moda', 'Times New Roman', serif;
+  font-size: 18px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* Subtle paper-grain overlay */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 2px,
+      rgba(0,0,0,0.015) 2px,
+      rgba(0,0,0,0.015) 4px
+    );
+  z-index: 1000;
+}
+
+/* Header ------------------------------------------------------------ */
+header {
+  border-bottom: 1px solid var(--line);
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  font-style: italic;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  color: var(--ink);
+  text-decoration: none;
+}
+header .logo { font-size: 2.5rem; }
+.logo svg {
+  width: 0.95em;
+  height: 0.95em;
+  color: var(--forest);
+  flex-shrink: 0;
+}
+nav a {
+  color: var(--ink);
+  text-decoration: none;
+  margin-left: 2.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color 0.2s;
+}
+nav a:hover { border-color: var(--forest); }
+
+/* Section layout --------------------------------------------------- */
+section {
+  padding: 5rem 3rem;
+  border-bottom: 1px solid var(--line);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--forest);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.section-label::before {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--forest);
+}
+h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-weight: 900;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+h2 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+  font-style: italic;
+  margin-bottom: 2rem;
+  max-width: 18ch;
+}
+h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.01em;
+}
+
+p { margin-bottom: 1rem; max-width: 70ch; }
+p.lead {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  max-width: 60ch;
+}
+
+a { color: var(--forest); }
+a:hover { color: var(--ink); }
+
+/* Forms ----------------------------------------------------------- */
+.form {
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 1.25rem;
+  max-width: 640px;
+}
+.form .row {
+  display: grid;
+  gap: 0.5rem;
+}
+.form .row.row-2 {
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+@media (max-width: 700px) {
+  .form .row.row-2 { grid-template-columns: 1fr; }
+}
+.form label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.form label .req { color: var(--forest); }
+.form input,
+.form select,
+.form textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  width: 100%;
+}
+.form input:focus,
+.form select:focus,
+.form textarea:focus {
+  outline: none;
+  border-color: var(--forest);
+}
+.form textarea { min-height: 140px; resize: vertical; }
+.form .help {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+.form .submit-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Buttons --------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  background: transparent;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+.btn-primary {
+  background: var(--forest);
+  color: var(--paper);
+  border-color: var(--forest);
+}
+.btn-primary:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+/* Callout panel ---------------------------------------------------- */
+.callout {
+  margin-top: 2.5rem;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--forest);
+  padding: 2rem 2.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  background: rgba(0,0,0,0.02);
+  max-width: 880px;
+}
+.callout-icon {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--forest);
+  white-space: nowrap;
+  padding-top: 0.2rem;
+  flex-shrink: 0;
+}
+.callout p { color: var(--ink); font-size: 1rem; line-height: 1.6; }
+
+/* Footer ---------------------------------------------------------- */
+footer {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 4rem 3rem 2rem;
+  margin-top: 0;
+}
+footer .footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+footer h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+footer a {
+  display: block;
+  color: var(--paper);
+  text-decoration: none;
+  padding: 0.3rem 0;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+footer a:hover { opacity: 1; }
+footer .colophon {
+  max-width: 1400px;
+  margin: 3rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+}
+footer .footer-logo {
+  color: var(--paper);
+  margin-bottom: 1rem;
+}
+footer .footer-tagline {
+  opacity: 0.7;
+  max-width: 35ch;
+}
+
+/* Sub-page content area (for non-landing pages) -------------------- */
+.page-body { max-width: 880px; margin: 0 auto; padding: 4rem 3rem; }
+.page-body h1 { margin-bottom: 1rem; }
+.page-body .lede {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 3rem;
+  max-width: 60ch;
+}
+.page-body section {
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--line);
+  max-width: none;
+}
+.page-body section:last-of-type { border-bottom: none; }
+
+/* Responsive ------------------------------------------------------- */
+@media (max-width: 800px) {
+  header { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 1rem; }
+  nav a { margin-left: 0; margin-right: 1.5rem; }
+  section { padding: 3rem 1.5rem; }
+  .page-body { padding: 2.5rem 1.5rem; }
+  footer { padding: 3rem 1.5rem 1.5rem; }
+  footer .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  footer .colophon { flex-direction: column; gap: 1rem; }
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Docs — Agentorist</title>
+<meta name="description" content="Connect your AI agent to Agentorist. MCP configuration, available tools, and authentication.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand.css">
+<style>
+  .tool-grid {
+    display: grid;
+    gap: 0;
+    border: 1px solid var(--line);
+    margin-top: 2rem;
+  }
+  .tool-row {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    border-bottom: 1px solid var(--line);
+  }
+  .tool-row:last-child { border-bottom: none; }
+  .tool-name {
+    padding: 1.25rem 1.5rem;
+    border-right: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--forest);
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+  }
+  .tool-desc {
+    padding: 1.25rem 1.5rem;
+    font-size: 0.95rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+  }
+  .code-block {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2rem;
+    margin-top: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+  }
+  .code-block .comment { color: #6b6258; }
+  .code-block .string { color: #8fb673; }
+  .code-block .keyword { color: var(--gold); }
+  .code-wrap { position: relative; margin-top: 2rem; }
+  .code-wrap .code-block { margin-top: 0; }
+  .copy-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: var(--gold); color: var(--ink); }
+  .cta-row {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 600px) {
+    .tool-row { grid-template-columns: 1fr; }
+    .tool-name { border-right: none; border-bottom: 1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="agt-mark" viewBox="0 0 100 100">
+    <path fill="currentColor" d="M 50 10 L 63.6 42 L 96 50 L 70.4 58 L 78 76 L 64 76 L 50 56 L 36 76 L 22 76 L 29.6 58 L 4 50 L 36.4 42 Z"/>
+    <path fill="currentColor" d="M 28 44 L 72 44 L 72 56 L 28 56 Z"/>
+    <path fill="currentColor" d="M 47 68 L 53 68 L 50 84 Z"/>
+  </symbol>
+</svg>
+
+<header>
+  <a class="logo" href="index.html"><svg aria-hidden="true"><use href="#agt-mark"/></svg>Agentorist</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="integrate.html">Integrate</a>
+    <a href="data-reports.html">Demand Reports</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<div class="page-body">
+  <div class="section-label">Developer documentation</div>
+  <h1>Connect your agent<br><em>in minutes.</em></h1>
+  <p class="lede">
+    Agentorist is a Model Context Protocol (MCP) server. Any MCP-compatible client can connect and immediately give its users the ability to discover, route, and book — without leaving the conversation.
+  </p>
+
+  <section>
+    <h3>Quick start</h3>
+    <p>Add Agentorist to your MCP client config. No API key required to start — authenticated booking requires OAuth (see below).</p>
+
+    <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong>Server URL</strong> — works with any MCP-compatible client (Claude Desktop, Cursor, Cline, Gemini CLI, and others):</p>
+    <div class="code-wrap">
+      <div class="code-block" id="genericConfig"><span class="string">https://mcp.agentorist.com/mcp</span>
+<span class="comment">Transport: streamable-http</span></div>
+      <button class="copy-btn" onclick="copySnippet('genericConfig', this)">Copy</button>
+    </div>
+
+    <p style="margin-top: 2rem; margin-bottom: 0.5rem;"><strong>Claude Desktop / Cursor</strong> — JSON config format, add to <code>mcpServers</code>:</p>
+    <div class="code-wrap">
+      <div class="code-block" id="claudeConfig">
+{
+  <span class="string">"mcpServers"</span>: {
+    <span class="string">"agentorist"</span>: {
+      <span class="string">"url"</span>: <span class="string">"https://mcp.agentorist.com/mcp"</span>,
+      <span class="string">"transport"</span>: <span class="string">"streamable-http"</span>
+    }
+  }
+}</div>
+      <button class="copy-btn" onclick="copySnippet('claudeConfig', this)">Copy</button>
+    </div>
+  </section>
+
+  <section>
+    <h3>Available tools</h3>
+    <p>Connecting to Agentorist gives your agent seven tools:</p>
+
+    <div class="tool-grid">
+      <div class="tool-row">
+        <div class="tool-name">list_verticals</div>
+        <div class="tool-desc">Returns the booking categories Agentorist supports (movies, events, hotels, etc.) and their current availability status.</div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-name">search</div>
+        <div class="tool-desc">Search for bookable items within a specific vertical — e.g. concerts in Boston this weekend, or hotels in Lisbon for two nights.</div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-name">search_all</div>
+        <div class="tool-desc">Cross-vertical search. Returns results across all supported categories for a given query and location.</div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-name">find_options</div>
+        <div class="tool-desc">Given a specific item (a show, venue, or listing), returns available booking options — ticket classes, showtimes, seat types, pricing.</div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-name">book</div>
+        <div class="tool-desc">Completes a booking inline where the partner supports it. Returns a confirmation number and ticket details. Requires OAuth.</div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-name">list_venues</div>
+        <div class="tool-desc">Lists venues in a given area and vertical. Useful for discovery before a user has a specific item in mind.</div>
+      </div>
+      <div class="tool-row">
+        <div class="tool-name">request_unsupported_booking</div>
+        <div class="tool-desc">When a booking can't be completed inline, returns the best available deep link to the partner's own checkout — pre-filled where possible.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Authentication</h3>
+    <p>
+      Search and discovery tools (<code>list_verticals</code>, <code>search</code>, <code>search_all</code>, <code>find_options</code>, <code>list_venues</code>, <code>request_unsupported_booking</code>) work without authentication.
+    </p>
+    <p>
+      The <code>book</code> tool requires an OAuth 2.0 token with the <code>book:tickets</code> scope. Agentorist uses the standard OAuth 2.0 authorization code flow:
+    </p>
+    <div class="code-block">
+<span class="comment"># Authorization endpoint</span>
+<span class="string">https://agentorist.com/oauth/authorize</span>
+
+<span class="comment"># Token endpoint</span>
+<span class="string">https://agentorist.com/oauth/token</span>
+
+<span class="comment"># Required scopes</span>
+read:listings   <span class="comment"># search and discovery</span>
+book:tickets    <span class="comment"># completing bookings</span>
+    </div>
+    <p style="margin-top: 1.5rem;">
+      OAuth credentials are available to registered partners. <a href="contact.html">Contact us</a> to get set up.
+    </p>
+  </section>
+
+  <section>
+    <h3>Discovery manifest</h3>
+    <p>
+      The machine-readable server card is available at <code>/.well-known/mcp.json</code>. It describes the server, its transport, capabilities, and OAuth endpoints in the MCP 2026-01 server card format.
+    </p>
+    <div class="cta-row">
+      <a href="/.well-known/mcp.json" class="btn">View mcp.json</a>
+    </div>
+  </section>
+
+  <section>
+    <h3>Support</h3>
+    <p>
+      Questions, integration issues, or feedback: <a href="mailto:hello@agentorist.com">hello@agentorist.com</a>
+    </p>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="logo footer-logo"><svg aria-hidden="true"><use href="#agt-mark"/></svg>Agentorist</div>
+      <p class="footer-tagline">The AI-agent-native booking gateway. Search. Compare. Book. All from inside the conversation.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <a href="index.html#how">How it works</a>
+      <a href="index.html#verticals">What we book</a>
+      <a href="docs.html">Documentation</a>
+    </div>
+    <div>
+      <h4>Partners</h4>
+      <a href="integrate.html">Integrate</a>
+      <a href="data-reports.html">Demand reports</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>© 2026 Agentorist</span>
+    <span>This product uses the TMDB API but is not endorsed or certified by TMDB.</span>
+  </div>
+</footer>
+
+<script>
+  function copySnippet(id, btn) {
+    const el = document.getElementById(id);
+    navigator.clipboard.writeText(el.innerText).then(() => {
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    }).catch(() => {
+      btn.textContent = 'Failed';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    });
+  }
+</script>
+</body>
+</html>

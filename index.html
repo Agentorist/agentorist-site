@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentorist — The Booking Layer for AI Agents</title>
+<meta name="description" content="The booking layer between AI agents and the world's booking economy. Movies, events, appointments, experiences — anything that can be booked, through one connection.">
+<meta property="og:title" content="Agentorist — The Booking Layer for AI Agents">
+<meta property="og:description" content="The booking layer between AI agents and the world's booking economy.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0908;
+    --paper: #f8f7f3;          /* less off-white, between cream and pure white */
+    --forest: #1d7a3f;         /* primary brand accent — brighter forest */
+    --gold: #d4a017;
+    --line: #1a1614;
+    --muted: #6b6258;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--paper); color: var(--ink); }
+  body {
+    font-family: 'Bodoni Moda', 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0,
+        transparent 2px,
+        rgba(0,0,0,0.015) 2px,
+        rgba(0,0,0,0.015) 4px
+      );
+    z-index: 1000;
+  }
+
+  .ticker {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 8px 0;
+    overflow: hidden;
+    border-bottom: 1px solid var(--gold);
+  }
+  .ticker-track {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker 60s linear infinite;
+  }
+  .ticker-track span { padding: 0 2rem; }
+  .ticker-track span::before { content: '★ '; color: var(--gold); }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  header {
+    border-bottom: 1px solid var(--line);
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    font-style: italic;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+  /* Header wordmark — bumped up for prominence; footer logo stays small. */
+  header .logo {
+    font-size: 2.5rem;
+  }
+  .logo svg {
+    width: 0.95em;
+    height: 0.95em;
+    color: var(--forest);
+    flex-shrink: 0;
+  }
+  nav a {
+    color: var(--ink);
+    text-decoration: none;
+    margin-left: 2.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+  nav a:hover { border-color: var(--forest); }
+
+  .hero {
+    padding: 6rem 3rem 4rem;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    font-weight: 900;
+    font-style: italic;
+  }
+  .hero h1 .underline {
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    padding-bottom: 0.42em;
+  }
+  .hero h1 .underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0.04em;
+    left: 0; right: 0;
+    height: 0.08em;
+    background: var(--forest);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: underline-in 1.2s 0.5s ease-out forwards;
+  }
+  @keyframes underline-in {
+    to { transform: scaleX(1); }
+  }
+  .hero .lead {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    max-width: 32ch;
+    color: var(--ink);
+  }
+  .hero .lead strong { font-weight: 700; }
+  .hero .meta {
+    margin-top: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .hero .meta span::before {
+    content: '— ';
+    color: var(--forest);
+  }
+
+  .serial {
+    position: absolute;
+    top: 2rem;
+    right: 3rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+  }
+
+  section {
+    padding: 5rem 3rem;
+    border-bottom: 1px solid var(--line);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--forest);
+  }
+  h2 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-weight: 900;
+    font-style: italic;
+    margin-bottom: 2rem;
+    max-width: 18ch;
+  }
+
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+    margin-top: 3rem;
+  }
+  .strip-cell {
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .strip-cell:last-child { border-right: none; }
+  .strip-cell .num {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--forest);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .strip-cell h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .strip-cell p {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .verticals {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+    margin-top: 3rem;
+  }
+  .vertical-cell {
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--line);
+    text-align: center;
+    position: relative;
+  }
+  .vertical-cell:last-child { border-right: none; }
+  .vertical-cell .icon {
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .vertical-cell h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .vertical-cell .status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .vertical-cell.live .status { color: var(--forest); font-weight: 600; }
+  .vertical-cell.soon { opacity: 0.55; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--line);
+    margin-top: 3rem;
+  }
+  .two-col > div {
+    padding: 3rem 2.5rem;
+  }
+  .two-col > div:first-child {
+    border-right: 1px solid var(--line);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .two-col h3 {
+    font-style: italic;
+    font-size: 2rem;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+  .two-col h3::before {
+    display: block;
+    content: 'FOR';
+    font-style: normal;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .two-col p { margin-bottom: 1rem; }
+  .two-col ul { list-style: none; margin-top: 1.5rem; }
+  .two-col li {
+    padding: 0.6rem 0;
+    border-top: 1px dashed currentColor;
+    opacity: 0.85;
+    font-size: 0.95rem;
+  }
+  .two-col li::before {
+    content: '→ ';
+    color: var(--forest);
+    margin-right: 0.4rem;
+  }
+  .two-col > div:first-child li::before {
+    color: var(--gold);
+  }
+
+  .mode-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+    margin-top: 3rem;
+  }
+  .mode-cell {
+    padding: 3rem 2.5rem;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .mode-cell:last-child { border-right: none; }
+  .mode-cell .mode-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin-bottom: 1.25rem;
+  }
+  .mode-cell h3 {
+    font-size: 2rem;
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    line-height: 1;
+  }
+  .mode-cell p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .callout {
+    margin-top: 2.5rem;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--forest);
+    padding: 2rem 2.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    background: rgba(0,0,0,0.02);
+  }
+  .callout-icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--forest);
+    white-space: nowrap;
+    padding-top: 0.2rem;
+    flex-shrink: 0;
+  }
+  .callout p {
+    color: var(--ink);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .code-block {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2rem;
+    margin-top: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+    border: 1px solid var(--gold);
+  }
+  .code-block .comment { color: #6b6258; }
+  .code-block .keyword { color: var(--gold); }
+  .code-block .string { color: #8fb673; }
+  .code-wrap { position: relative; margin-top: 2rem; }
+  .code-wrap .code-block { margin-top: 0; }
+  .copy-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: var(--gold); color: var(--ink); }
+
+  .cta-row {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    background: transparent;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn-primary {
+    background: var(--forest);
+    color: var(--paper);
+    border-color: var(--forest);
+  }
+  .btn-primary:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 4rem 3rem 2rem;
+    margin-top: 0;
+  }
+  footer .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  footer h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  footer a {
+    display: block;
+    color: var(--paper);
+    text-decoration: none;
+    padding: 0.3rem 0;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  footer a:hover { opacity: 1; }
+  footer .colophon {
+    max-width: 1400px;
+    margin: 3rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 800px) {
+    header { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 1rem; }
+    nav a { margin-left: 0; margin-right: 1.5rem; }
+    .hero { padding: 3rem 1.5rem 2rem; }
+    .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+    section { padding: 3rem 1.5rem; }
+    .strip, .two-col, .verticals, .mode-strip { grid-template-columns: 1fr; }
+    .strip-cell, .vertical-cell, .mode-cell { border-right: none; border-bottom: 1px solid var(--line); }
+    .two-col > div:first-child { border-right: none; border-bottom: 1px solid var(--line); }
+    .serial { display: none; }
+    footer .footer-grid { grid-template-columns: 1fr 1fr; }
+    footer .colophon { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="agt-mark" viewBox="0 0 100 100">
+    <path fill="currentColor" d="M 50 10 L 63.6 42 L 96 50 L 70.4 58 L 78 76 L 64 76 L 50 56 L 36 76 L 22 76 L 29.6 58 L 4 50 L 36.4 42 Z"/>
+    <path fill="currentColor" d="M 28 44 L 72 44 L 72 56 L 28 56 Z"/>
+    <path fill="currentColor" d="M 47 68 L 53 68 L 50 84 Z"/>
+  </symbol>
+</svg>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Discover · Route · Book</span>
+    <span>Always improving</span>
+    <span>The long tail of the booking economy</span>
+    <span>Discovery to confirmation in one conversation</span>
+    <span>Built on Model Context Protocol</span>
+    <span>Events · Movies · Hotels · Appointments · Restaurants · Anything Bookable</span>
+    <span>Discover · Route · Book</span>
+    <span>Always improving</span>
+    <span>The long tail of the booking economy</span>
+    <span>Discovery to confirmation in one conversation</span>
+    <span>Built on Model Context Protocol</span>
+    <span>Events · Movies · Hotels · Appointments · Restaurants · Anything Bookable</span>
+  </div>
+</div>
+
+<header>
+  <div class="logo"><svg aria-hidden="true"><use href="#agt-mark"/></svg>Agentorist</div>
+  <nav>
+    <a href="#modes">Discover · Route · Book</a>
+    <a href="#verticals">What we book</a>
+    <a href="#audiences">Audiences</a>
+    <a href="#developers">Developers</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="serial">No. 001 / EST. 2026</div>
+  <div class="hero-grid">
+    <div>
+      <h1>
+        Book anything,<br>
+        <em>through</em> <span class="underline">AI agents.</span>
+      </h1>
+    </div>
+    <div>
+      <p class="lead">
+        <strong>Working to bring seamless integrations to AI agents.</strong> Discovery, routing, and booking — all inside the conversation.
+      </p>
+      <div class="meta">
+        <span>Built on Model Context Protocol</span>
+        <span>Submitting to MCP registries</span>
+        <span>Compatible with Claude, ChatGPT, Gemini</span>
+      </div>
+      <div class="cta-row">
+        <a href="#developers" class="btn btn-primary">Connect to Agentorist</a>
+        <a href="#audiences" class="btn">For Operators</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="modes">
+  <div class="section-label">How Agentorist works</div>
+  <h2>Discover. Route. Book.</h2>
+
+  <div class="mode-strip">
+    <div class="mode-cell">
+      <div class="mode-num">01 — Discover</div>
+      <h3>Find anything bookable.</h3>
+      <p>Movies, events, salons, restaurants, gyms, experiences. Agentorist searches across thousands of venues and platforms in real time.</p>
+    </div>
+    <div class="mode-cell">
+      <div class="mode-num">02 — Route</div>
+      <h3>Always a path forward.</h3>
+      <p>When inline booking isn't available yet, Agentorist returns a pre-filled deep link. One tap and the user is at checkout with everything already selected.</p>
+    </div>
+    <div class="mode-cell">
+      <div class="mode-num">03 — Book</div>
+      <h3>Inline where possible.</h3>
+      <p>Where platforms support it, Agentorist completes the booking inline. Confirmation and QR code returned directly inside the conversation. No browser. No redirect.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="callout-icon">Honest</span>
+    <p>If we can't complete a booking yet, we'll tell you — and still give you the booking information and the fastest path to checkout. We log every gap and push to close it.</p>
+  </div>
+</section>
+
+<section id="how">
+  <div class="section-label">How it works</div>
+  <h2>3 Steps at the least amount of user friction possible.</h2>
+
+  <div class="strip">
+    <div class="strip-cell">
+      <div class="num">01</div>
+      <h3>Ask</h3>
+      <p>Tell your AI agent what you want. <em>"Two tickets for Anaconda tonight in Brooklyn, after 8pm."</em></p>
+    </div>
+    <div class="strip-cell">
+      <div class="num">02</div>
+      <h3>Decide</h3>
+      <p>Agentorist returns live information and real booking options.</p>
+    </div>
+    <div class="strip-cell">
+      <div class="num">03</div>
+      <h3>Done</h3>
+      <p>Bookings are inline where possible or through a provided link. One click max. Confirmations and tickets back through your phone if you prefer.</p>
+    </div>
+  </div>
+</section>
+
+<section id="verticals">
+  <div class="section-label">What we book</div>
+  <h2>One layer. Anything that can be booked.</h2>
+
+  <div class="verticals" style="grid-template-columns: repeat(6, 1fr);">
+    <div class="vertical-cell live">
+      <span class="icon">▲</span>
+      <h4>Events</h4>
+      <p class="status">Live</p>
+    </div>
+    <div class="vertical-cell soon">
+      <span class="icon">◉</span>
+      <h4>Movies</h4>
+      <p class="status">Q2 2026</p>
+    </div>
+    <div class="vertical-cell soon">
+      <span class="icon">⬢</span>
+      <h4>Hotels</h4>
+      <p class="status">Q3 2026</p>
+    </div>
+    <div class="vertical-cell soon">
+      <span class="icon">✦</span>
+      <h4>Appointments</h4>
+      <p class="status">Q3 2026</p>
+    </div>
+    <div class="vertical-cell soon">
+      <span class="icon">✚</span>
+      <h4>Restaurants</h4>
+      <p class="status">Q4 2026</p>
+    </div>
+    <div class="vertical-cell soon">
+      <span class="icon">◆</span>
+      <h4>And more</h4>
+      <p class="status">Rolling</p>
+    </div>
+  </div>
+</section>
+
+<section id="audiences">
+  <div class="section-label">Two doors. One layer.</div>
+  <h2>Whether you're booking or being booked — there's a door for you.</h2>
+
+  <div class="two-col">
+    <div>
+      <h3>Users</h3>
+      <p>You don't install Agentorist. You don't sign up for Agentorist. You don't even need to know we exist.</p>
+      <p>You just talk to your AI assistant — Claude, ChatGPT, Gemini — the way you already do. When you ask it to find tickets, it finds us. When you ask it to book, we book.</p>
+      <ul>
+        <li>Search across thousands of venues in seconds</li>
+        <li>No app, no signup, no password</li>
+        <li>Works wherever your agent works</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Operators</h3>
+      <p>Right now, when someone asks an AI agent to book your venue, it returns nothing. We measure that miss.</p>
+      <p>Agentorist sends you a monthly report: how many people asked their AI to book at your venue and walked away empty-handed. Then we help you fix it.</p>
+      <ul>
+        <li>Quantified missed-revenue data, by location and date</li>
+        <li>Direct integration path via partner API</li>
+        <li>Featured placement when agents come knocking</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="developers">
+  <div class="section-label">For developers</div>
+  <h2>One MCP endpoint. Everywhere agents look to book.</h2>
+
+  <p style="max-width: 65ch; margin-top: 1rem;">
+    Agentorist is a Model Context Protocol server. Any MCP-compatible client — Claude Desktop, ChatGPT, Cursor, Gemini CLI, Cline — can connect and immediately gain seven new tools: <code>list_verticals</code>, <code>search</code>, <code>search_all</code>, <code>find_options</code>, <code>book</code>, <code>list_venues</code>, and <code>request_unsupported_booking</code>.
+  </p>
+
+  <div class="code-wrap">
+    <div class="code-block" id="serverConfig">
+<span class="comment"># Claude Desktop config — add to mcpServers</span>
+{
+  <span class="string">"mcpServers"</span>: {
+    <span class="string">"agentorist"</span>: {
+      <span class="string">"url"</span>: <span class="string">"https://mcp.agentorist.com/mcp"</span>,
+      <span class="string">"transport"</span>: <span class="string">"streamable-http"</span>
+    }
+  }
+}
+    </div>
+    <button class="copy-btn" id="copyBtn" onclick="copyConfig()">Copy</button>
+  </div>
+
+  <div class="cta-row">
+    <a href="docs.html" class="btn btn-primary">Read the docs</a>
+    <a href="/.well-known/mcp.json" class="btn">Discovery manifest</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="logo" style="color: var(--paper); margin-bottom: 1rem;"><svg aria-hidden="true"><use href="#agt-mark"/></svg>Agentorist</div>
+      <p style="opacity: 0.7; max-width: 35ch;">The AI-agent-native booking gateway. Search. Compare. Book. All from inside the conversation.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <a href="#how">How it works</a>
+      <a href="#verticals">What we book</a>
+      <a href="docs.html">Documentation</a>
+    </div>
+    <div>
+      <h4>Partners</h4>
+      <a href="#audiences">For operators</a>
+      <a href="integrate.html">Integrate</a>
+      <a href="data-reports.html">Demand reports</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>© 2026 Agentorist</span>
+    <span>Built for the agentic era · MCP-native · Made with care</span>
+  </div>
+</footer>
+
+<script>
+  function copyConfig() {
+    const text = '{\n  "mcpServers": {\n    "agentorist": {\n      "url": "https://mcp.agentorist.com/mcp",\n      "transport": "streamable-http"\n    }\n  }\n}';
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    }).catch(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = 'Failed';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    });
+  }
+</script>
+</body>
+</html>

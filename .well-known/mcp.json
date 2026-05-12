@@ -1,0 +1,41 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schemas/2026-01/server-card.json",
+  "version": "1.0.0",
+  "protocolVersion": "2026-01",
+  "serverInfo": {
+    "name": "Agentorist",
+    "title": "Agentorist — The Booking Layer for AI Agents",
+    "description": "Agentorist is the discovery, routing, and booking layer for AI agents. Search movies, events, restaurants, salons, gyms and experiences globally. Complete bookings inline where supported, or receive a pre-filled deep link for one-tap checkout. Coverage expanding continuously.",
+    "vendor": "Agentorist",
+    "homepage": "https://agentorist.com",
+    "documentation": "https://agentorist.com/docs"
+  },
+  "transport": {
+    "type": "streamable-http",
+    "url": "https://mcp.agentorist.com/mcp"
+  },
+  "capabilities": {
+    "tools": [
+      "list_verticals",
+      "search",
+      "search_all",
+      "find_options",
+      "book",
+      "list_venues",
+      "request_unsupported_booking"
+    ]
+  },
+  "auth": {
+    "type": "oauth2",
+    "authorization_url": "https://agentorist.com/oauth/authorize",
+    "token_url": "https://agentorist.com/oauth/token",
+    "scopes": ["read:listings", "book:tickets"]
+  },
+  "verticals": [
+    {"name": "movies", "description": "Movie tickets across cinema chains and indies worldwide."},
+    {"name": "events", "description": "Live events, concerts, and experiences."},
+    {"name": "hotels", "description": "Hotel rooms — boutique, independent, and chain properties."},
+    {"name": "appointments", "description": "Salons, beauty, fitness, and personal-services bookings — coming Q3 2026."},
+    {"name": "restaurants", "description": "Restaurant reservations and dining bookings — coming Q4 2026."}
+  ]
+}

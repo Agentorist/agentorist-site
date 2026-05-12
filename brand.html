@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentorist — Brand Mark v1</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0908;
+    --paper: #f8f7f3;          /* less off-white, between cream and pure white */
+    --forest: #1d7a3f;         /* primary brand accent — brighter forest */
+    --gold: #d4a017;
+    --line: #1a1614;
+    --muted: #6b6258;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Bodoni Moda', serif;
+    padding: 4rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--forest);
+  }
+  h1 {
+    font-style: italic;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin: 1rem 0 1rem;
+  }
+  .intro {
+    max-width: 60ch;
+    color: var(--muted);
+    margin-bottom: 4rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  section {
+    border: 1px solid var(--line);
+    margin-bottom: 3rem;
+    background: var(--paper);
+  }
+  .section-head {
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .section-head h2 {
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .grid-2 > div { padding: 2.5rem 2rem; }
+  .grid-2 > div + div { border-left: 1px solid var(--line); }
+
+  /* Hero mark */
+  .hero-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 2rem;
+    background: var(--paper);
+  }
+  .hero-mark svg { width: 240px; height: 240px; color: var(--ink); }
+
+  /* Construction grid */
+  .construction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .construction svg { width: 360px; height: 360px; max-width: 100%; }
+
+  /* Lockups */
+  .lockup-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding: 2rem 0;
+  }
+  .lockup {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .lockup-large { font-size: 4rem; }
+  .lockup-medium { font-size: 2rem; }
+  .lockup-small  { font-size: 1.2rem; }
+  .lockup svg { color: currentColor; flex-shrink: 0; }
+
+  .lockup-stacked {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4em;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+  .lockup-stacked svg { color: currentColor; }
+
+  /* Color variants */
+  .swatch-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .swatch {
+    padding: 2.5rem 1rem;
+    text-align: center;
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .swatch:last-child { border-right: none; }
+  .swatch.on-paper { background: var(--paper); }
+  .swatch.on-paper svg { color: var(--ink); }
+  .swatch.on-ink { background: var(--ink); color: var(--paper); }
+  .swatch.on-ink svg { color: var(--paper); }
+  .swatch.crimson { background: var(--paper); }
+  .swatch.crimson svg { color: var(--forest); }
+  .swatch.crimson-on-ink { background: var(--ink); color: var(--paper); }
+  .swatch.crimson-on-ink svg { color: var(--forest); }
+  .swatch svg { width: 80px; height: 80px; }
+  .swatch .name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  /* Sizing */
+  .size-ladder {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 3rem;
+    padding: 3rem 1rem;
+    flex-wrap: wrap;
+  }
+  .size-step { text-align: center; color: var(--ink); }
+  .size-step svg { color: currentColor; display: block; margin: 0 auto 0.6rem; }
+  .size-step .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Clear space */
+  .clear-space {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    background: repeating-linear-gradient(45deg, transparent 0 8px, rgba(193,39,45,0.06) 8px 9px);
+  }
+  .clear-space-inner {
+    position: relative;
+    padding: 64px;
+    border: 1px dashed var(--forest);
+  }
+  .clear-space-inner svg { width: 128px; height: 128px; color: var(--ink); display: block; }
+  .clear-space-tag {
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    background: var(--paper);
+    padding: 0 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--forest);
+  }
+
+  /* Don'ts */
+  .donts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .dont {
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--line);
+    text-align: center;
+  }
+  .dont:last-child { border-right: none; }
+  .dont .demo {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .dont .demo svg { width: 80px; height: 80px; color: var(--ink); }
+  .dont .caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--forest);
+  }
+  .dont .caption::before { content: '✕  '; }
+
+  .favicon-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1.5rem 0;
+  }
+  .browser-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 6px 6px 0 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+  .browser-tab img { width: 16px; height: 16px; }
+
+  p { line-height: 1.55; }
+  ul { padding-left: 1.5rem; line-height: 1.8; }
+  code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 0 0.3em; border-radius: 2px; }
+
+  @media (max-width: 800px) {
+    body { padding: 2rem 1.5rem; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .grid-2 > div + div { border-left: none; border-top: 1px solid var(--line); }
+    .swatch-row { grid-template-columns: 1fr 1fr; }
+    .donts { grid-template-columns: 1fr; }
+    .lockup-large { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Reusable mark -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="agt-mark" viewBox="0 0 100 100">
+    <path fill="currentColor" d="M 50 10 L 63.6 42 L 96 50 L 70.4 58 L 78 76 L 64 76 L 50 56 L 36 76 L 22 76 L 29.6 58 L 4 50 L 36.4 42 Z"/>
+    <path fill="currentColor" d="M 28 44 L 72 44 L 72 56 L 28 56 Z"/>
+    <path fill="currentColor" d="M 47 68 L 53 68 L 50 84 Z"/>
+  </symbol>
+</svg>
+
+<div class="label">Brand Mark · v1</div>
+<h1>Agentorist — <em>The Compass.</em></h1>
+<p class="intro">
+  A bold capital "A" bisecting a four-point compass rose. The apex points North, the crossbar extends out as East and West needles, and a small needle hangs from the inner V notch as South. Letterform and wayfinder fused into one mark. An Agentorist is one whose vocation is finding things on behalf of agents — a compass is the right metaphor.
+</p>
+
+<!-- HERO -->
+<section>
+  <div class="section-head">
+    <h2>The mark</h2>
+    <span class="label">Master · monochrome</span>
+  </div>
+  <div class="hero-mark">
+    <svg viewBox="0 0 100 100" aria-label="Agentorist mark"><use href="#agt-mark"/></svg>
+  </div>
+</section>
+
+<!-- CONSTRUCTION -->
+<section>
+  <div class="section-head">
+    <h2>Construction</h2>
+    <span class="label">100 × 100 grid</span>
+  </div>
+  <div class="grid-2" style="border-top: 1px solid var(--line);">
+    <div class="construction">
+      <svg viewBox="-5 -5 110 110" aria-hidden="true">
+        <!-- Grid -->
+        <g stroke="#d4a017" stroke-width="0.25" opacity="0.55">
+          <path d="M 0 0 H 100 M 0 10 H 100 M 0 20 H 100 M 0 30 H 100 M 0 40 H 100 M 0 50 H 100 M 0 60 H 100 M 0 70 H 100 M 0 80 H 100 M 0 90 H 100 M 0 100 H 100"/>
+          <path d="M 0 0 V 100 M 10 0 V 100 M 20 0 V 100 M 30 0 V 100 M 40 0 V 100 M 50 0 V 100 M 60 0 V 100 M 70 0 V 100 M 80 0 V 100 M 90 0 V 100 M 100 0 V 100"/>
+        </g>
+        <!-- Cardinal axes -->
+        <line x1="50" y1="-5" x2="50" y2="105" stroke="#1f5e3c" stroke-width="0.3" stroke-dasharray="1 2" opacity="0.7"/>
+        <line x1="-5" y1="50" x2="105" y2="50" stroke="#1f5e3c" stroke-width="0.3" stroke-dasharray="1 2" opacity="0.7"/>
+        <!-- Outer leg construction lines -->
+        <line x1="50" y1="10" x2="78" y2="76" stroke="#1f5e3c" stroke-width="0.3" stroke-dasharray="1.5 1.5" opacity="0.6"/>
+        <line x1="50" y1="10" x2="22" y2="76" stroke="#1f5e3c" stroke-width="0.3" stroke-dasharray="1.5 1.5" opacity="0.6"/>
+        <!-- The mark -->
+        <path fill="#0a0908" d="M 50 10 L 63.6 42 L 96 50 L 70.4 58 L 78 76 L 64 76 L 50 56 L 36 76 L 22 76 L 29.6 58 L 4 50 L 36.4 42 Z"/>
+        <path fill="#0a0908" d="M 28 44 L 72 44 L 72 56 L 28 56 Z"/>
+        <path fill="#0a0908" d="M 47 68 L 53 68 L 50 84 Z"/>
+        <!-- Cardinal labels -->
+        <g font-family="JetBrains Mono, monospace" font-size="3.4" fill="#1f5e3c" font-weight="600">
+          <text x="50" y="6"   text-anchor="middle">N</text>
+          <text x="98" y="51.5" text-anchor="end">E</text>
+          <text x="50" y="91"  text-anchor="middle">S</text>
+          <text x="2"  y="51.5" text-anchor="start">W</text>
+        </g>
+        <g font-family="JetBrains Mono, monospace" font-size="2.6" fill="#6b6258">
+          <text x="50" y="104" text-anchor="middle">A bisecting N · S · E · W</text>
+        </g>
+      </svg>
+    </div>
+    <div>
+      <h3 style="font-style: italic; font-size: 1.3rem; margin-bottom: 1rem;">How it's built</h3>
+      <ul>
+        <li><strong>N — Apex:</strong> single point at (50, 10). The chevron's apex doubles as the North needle.</li>
+        <li><strong>E / W — Crossbar wings:</strong> the bar of the A breaks out of the legs at y = 42–58 and tapers to points at (96, 50) and (4, 50).</li>
+        <li><strong>S — Inner needle:</strong> a small triangle anchored inside the V notch at (47, 68)–(53, 68), descending to a point at (50, 84) — visible through the open base of the A.</li>
+        <li><strong>Crossbar:</strong> 12-unit-thick bar at y = 44–56, sitting above the V valley so the inner negative space stays clean.</li>
+        <li><strong>Cardinal balance:</strong> the four needle tips sit on a perfect cross — N at y = 10, S tip at y = 84 (visually centred on the body), E and W at the y = 50 horizon line.</li>
+      </ul>
+      <p style="margin-top: 1rem; color: var(--muted); font-size: 0.95rem;">
+        Three filled SVG paths, plain <code>nonzero</code> winding, no masking or clipping. Renders identically everywhere from <code>cairo</code> to a 1996 browser.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- WORDMARK -->
+<section>
+  <div class="section-head">
+    <h2>Wordmark lockups</h2>
+    <span class="label">Bodoni Moda · Italic 900</span>
+  </div>
+  <div class="grid-2" style="border-top: 1px solid var(--line);">
+    <div>
+      <h3 style="font-style:italic; font-size: 1.2rem; margin-bottom: 1rem;">Horizontal</h3>
+      <div class="lockup-row">
+        <div class="lockup lockup-large">
+          <svg width="0.95em" height="0.95em" viewBox="0 0 100 100"><use href="#agt-mark"/></svg>
+          <span>Agentorist</span>
+        </div>
+        <div class="lockup lockup-medium">
+          <svg width="0.95em" height="0.95em" viewBox="0 0 100 100"><use href="#agt-mark"/></svg>
+          <span>Agentorist</span>
+        </div>
+        <div class="lockup lockup-small">
+          <svg width="0.95em" height="0.95em" viewBox="0 0 100 100"><use href="#agt-mark"/></svg>
+          <span>Agentorist</span>
+        </div>
+      </div>
+      <p style="color: var(--muted); font-size: 0.95rem; margin-top: 1rem;">
+        Mark height = 0.95 × cap-height. Spacing between mark and wordmark = 0.4 × mark height. Apex of mark visually aligns with the cap-line.
+      </p>
+    </div>
+    <div>
+      <h3 style="font-style:italic; font-size: 1.2rem; margin-bottom: 1rem;">Stacked</h3>
+      <div style="display: flex; align-items: center; justify-content: center; padding: 3rem 0;">
+        <div class="lockup-stacked" style="font-size: 2rem; color: var(--ink);">
+          <svg width="2em" height="2em" viewBox="0 0 100 100"><use href="#agt-mark"/></svg>
+          <span>Agentorist</span>
+        </div>
+      </div>
+      <p style="color: var(--muted); font-size: 0.95rem; margin-top: 1rem; text-align: center;">
+        Use stacked when horizontal space is tight — square ad units, social avatars, app icons.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR -->
+<section>
+  <div class="section-head">
+    <h2>Colour variants</h2>
+    <span class="label">Four official forms</span>
+  </div>
+  <div class="swatch-row" style="border-top: 1px solid var(--line);">
+    <div class="swatch on-paper">
+      <svg viewBox="0 0 100 100"><use href="#agt-mark"/></svg>
+      <span class="name">Ink on paper</span>
+    </div>
+    <div class="swatch on-ink">
+      <svg viewBox="0 0 100 100"><use href="#agt-mark"/></svg>
+      <span class="name">Paper on ink</span>
+    </div>
+    <div class="swatch crimson">
+      <svg viewBox="0 0 100 100"><use href="#agt-mark"/></svg>
+      <span class="name">Forest on paper</span>
+    </div>
+    <div class="swatch crimson-on-ink">
+      <svg viewBox="0 0 100 100"><use href="#agt-mark"/></svg>
+      <span class="name">Forest on ink</span>
+    </div>
+  </div>
+</section>
+
+<!-- SIZING -->
+<section>
+  <div class="section-head">
+    <h2>Sizing ladder</h2>
+    <span class="label">Min size · 14 px square</span>
+  </div>
+  <div class="size-ladder">
+    <div class="size-step">
+      <svg width="120" height="120" viewBox="0 0 100 100"><use href="#agt-mark"/></svg>
+      <div class="meta">120 px · Hero</div>
+    </div>
+    <div class="size-step">
+      <svg width="64" height="64" viewBox="0 0 100 100"><use href="#agt-mark"/></svg>
+      <div class="meta">64 px · App icon</div>
+    </div>
+    <div class="size-step">
+      <svg width="32" height="32" viewBox="0 0 100 100"><use href="#agt-mark"/></svg>
+      <div class="meta">32 px · Header</div>
+    </div>
+    <div class="size-step">
+      <svg width="16" height="16" viewBox="0 0 100 100"><use href="#agt-mark"/></svg>
+      <div class="meta">16 px · Favicon</div>
+    </div>
+  </div>
+  <div style="padding: 0 2rem 2rem; color: var(--muted); font-size: 0.95rem; text-align: center;">
+    Below 14 px the inner caret dissolves. For favicon / browser-tab use, switch to the ink-rounded-square variant (next section).
+  </div>
+</section>
+
+<!-- CLEAR SPACE -->
+<section>
+  <div class="section-head">
+    <h2>Clear space</h2>
+    <span class="label">= half the leg-base width</span>
+  </div>
+  <div class="clear-space">
+    <div class="clear-space-inner">
+      <span class="clear-space-tag">Min clear space</span>
+      <svg viewBox="0 0 100 100"><use href="#agt-mark"/></svg>
+    </div>
+  </div>
+  <div style="padding: 0 2rem 2rem; color: var(--muted); font-size: 0.95rem; text-align: center;">
+    Reserve a margin equal to half the leg-base width (≈ 9 / 100 grid units) on every side. Nothing — type, photography, edges — sits closer than that.
+  </div>
+</section>
+
+<!-- DON'TS -->
+<section>
+  <div class="section-head">
+    <h2>Don'ts</h2>
+    <span class="label">Off-limits transformations</span>
+  </div>
+  <div class="donts" style="border-top: 1px solid var(--line);">
+    <div class="dont">
+      <div class="demo">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="width: 130px; height: 70px;"><use href="#agt-mark"/></svg>
+      </div>
+      <div class="caption">Don't stretch</div>
+    </div>
+    <div class="dont">
+      <div class="demo">
+        <svg viewBox="0 0 100 100" style="transform: rotate(180deg);"><use href="#agt-mark"/></svg>
+      </div>
+      <div class="caption">Don't invert / flip</div>
+    </div>
+    <div class="dont">
+      <div class="demo">
+        <svg viewBox="0 0 100 100" style="color: limegreen;"><use href="#agt-mark"/></svg>
+      </div>
+      <div class="caption">Don't recolour</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAVICON -->
+<section>
+  <div class="section-head">
+    <h2>Favicon</h2>
+    <span class="label">Rounded · ink + forest</span>
+  </div>
+  <div style="padding: 2.5rem 2rem;">
+    <div class="favicon-row">
+      <span class="browser-tab">
+        <img src="favicon.svg" alt="">
+        <span>Agentorist — The AI-Agent-Native Booking Gateway</span>
+      </span>
+    </div>
+    <div class="favicon-row" style="gap: 2.5rem; align-items: center;">
+      <img src="favicon.svg" alt="" width="16" height="16">
+      <img src="favicon.svg" alt="" width="32" height="32">
+      <img src="favicon.svg" alt="" width="64" height="64">
+      <img src="favicon.svg" alt="" width="128" height="128">
+    </div>
+    <p style="margin-top: 1.5rem; color: var(--muted); font-size: 0.95rem;">
+      The favicon variant uses a rounded ink holder so the chevron survives at 16&nbsp;px against busy browser chrome — and gives the brand a recognisable colour signature in the tab strip.
+    </p>
+  </div>
+</section>
+
+<!-- FILES -->
+<section>
+  <div class="section-head">
+    <h2>Files in the repo</h2>
+    <span class="label">site/</span>
+  </div>
+  <div style="padding: 2rem;">
+    <ul>
+      <li><code>site/agentorist-mark.svg</code> — master mark, monochrome (uses <code>currentColor</code>).</li>
+      <li><code>site/favicon.svg</code> — favicon with rounded ink holder + forest mark.</li>
+      <li><code>site/index.html</code> — landing page, now uses the new mark inline.</li>
+      <li><code>site/brand.html</code> — this page.</li>
+    </ul>
+  </div>
+</section>
+
+<div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--line); color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;">
+  Brand mark v1 · The Caret · approve to lock or send notes for v2
+</div>
+
+</body>
+</html>

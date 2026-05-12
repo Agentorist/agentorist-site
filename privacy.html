@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Agentorist</title>
+<meta name="description" content="Agentorist's privacy policy — what data we collect, how we use it, and your rights.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="agt-mark" viewBox="0 0 100 100">
+    <path fill="currentColor" d="M 50 10 L 63.6 42 L 96 50 L 70.4 58 L 78 76 L 64 76 L 50 56 L 36 76 L 22 76 L 29.6 58 L 4 50 L 36.4 42 Z"/>
+    <path fill="currentColor" d="M 28 44 L 72 44 L 72 56 L 28 56 Z"/>
+    <path fill="currentColor" d="M 47 68 L 53 68 L 50 84 Z"/>
+  </symbol>
+</svg>
+
+<header>
+  <a class="logo" href="index.html"><svg aria-hidden="true"><use href="#agt-mark"/></svg>Agentorist</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="integrate.html">Integrate</a>
+    <a href="data-reports.html">Demand Reports</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<div class="page-body">
+  <div class="section-label">Privacy Policy</div>
+  <h1>Privacy<br><em>policy.</em></h1>
+  <p class="lede">
+    Last updated: 11 May 2026. This page explains what data Agentorist collects when you (or an AI agent acting on your behalf) use our service, how we use it, and the rights you have over it. We've tried to keep it short and readable.
+  </p>
+
+  <section>
+    <h3>Who we are</h3>
+    <p>
+      Agentorist is operated by Agentorist LLC, a limited liability company. References to "we", "us", or "our" mean Agentorist LLC. You can reach us about anything on this page at <a href="mailto:privacy@agentorist.com">privacy@agentorist.com</a>.
+    </p>
+  </section>
+
+  <section>
+    <h3>What Agentorist actually is</h3>
+    <p>
+      Agentorist is a Model Context Protocol (MCP) server. AI agents — Claude, ChatGPT, Gemini, Cursor and others — connect to us and call tools to search for bookable items, look up showtimes or ticket classes, and complete bookings. Most users never directly interact with Agentorist; they talk to their AI assistant, which talks to us.
+    </p>
+  </section>
+
+  <section>
+    <h3>What we collect</h3>
+    <p><strong>From every request:</strong></p>
+    <p>
+      <strong>·</strong> The vertical and query (e.g. "concerts in Boston tonight")<br>
+      <strong>·</strong> The location string the agent passed (city, postcode, lat/lng)<br>
+      <strong>·</strong> The name of the calling agent client where the agent provides it (e.g. "Claude Desktop")<br>
+      <strong>·</strong> Timestamp and a count of results returned<br>
+      <strong>·</strong> When a booking can't be fulfilled: the venue name, the item title, and the time the user asked about
+    </p>
+    <p><strong>From you, only if you give it to us:</strong></p>
+    <p>
+      <strong>·</strong> An email address — only when you explicitly opt in (for example by ticking "let me know when this venue joins") or when you submit a form on this website
+    </p>
+    <p><strong>What we do NOT collect:</strong></p>
+    <p>
+      <strong>·</strong> Payment details (bookings are completed by the partner — Ticketmaster, Fandango, etc. — not us)<br>
+      <strong>·</strong> Identity documents, real names, or any government IDs<br>
+      <strong>·</strong> Browsing history outside the specific request the AI agent makes<br>
+      <strong>·</strong> Any data from your AI assistant beyond the parameters of the tool call
+    </p>
+  </section>
+
+  <section>
+    <h3>How we use it</h3>
+    <p>
+      <strong>To answer your request.</strong> Each search, find-options, and book call is processed in real time and the relevant pieces are sent to the upstream provider (Ticketmaster, TMDB, Yelp, etc.) to get the answer.
+    </p>
+    <p>
+      <strong>To improve coverage.</strong> When a request can't be fulfilled (the venue isn't integrated, or the showtime isn't available through any of our providers), we keep an aggregated, anonymised record so we can quantify missed demand and approach venues about joining.
+    </p>
+    <p>
+      <strong>For analytics and dashboards.</strong> We compute aggregate metrics (top venues, top verticals, traffic by city) for our own operational dashboards. These are not shared publicly in a way that identifies individual users.
+    </p>
+    <p>
+      <strong>To contact you, if you asked us to.</strong> When you provide an email address through a form or a tool call, we use it solely for the purpose you provided it (notifying you when a venue joins, replying to a contact form, sending a report you requested).
+    </p>
+  </section>
+
+  <section>
+    <h3>Who we share it with</h3>
+    <p>
+      <strong>Upstream providers.</strong> To fulfil your request we pass query parameters (location, search term, dates) to the relevant booking provider. We pass only what's necessary for that specific call. Each provider has their own privacy policy that governs what they do with the data we pass. We don't send your IP address, identity, or contact details to providers — only the parameters of the specific request.
+    </p>
+    <p>
+      <strong>Operators and venues, in aggregate only.</strong> If you opted in by providing an email address to be notified about a specific venue, we may share that you expressed interest with the venue when they join. Aggregated demand reports we sell to venues do not include identifying information about individual users.
+    </p>
+    <p>
+      <strong>Affiliate networks.</strong> When you click a booking link returned by Agentorist, a tracking identifier may be attached so that the partner network can attribute the eventual purchase to us. The networks' own privacy policies govern that attribution.
+    </p>
+    <p>
+      <strong>We do not sell personal data.</strong> Full stop.
+    </p>
+  </section>
+
+  <section>
+    <h3>Where the data lives</h3>
+    <p>
+      Application data is stored on infrastructure operated by Railway (railway.com), hosted in the United States. Backups, if any, are stored in the same region. We retain operational data for as long as it's useful for the purposes above, and anonymise older records on an ongoing basis.
+    </p>
+  </section>
+
+  <section>
+    <h3>Your rights</h3>
+    <p>
+      Depending on where you live, you may have rights under the GDPR (EU/UK) or similar laws (CCPA in California, others) including:
+    </p>
+    <p>
+      <strong>·</strong> The right to know what we hold about you<br>
+      <strong>·</strong> The right to ask us to correct or delete it<br>
+      <strong>·</strong> The right to withdraw consent if you opted in to anything<br>
+      <strong>·</strong> The right to object to processing
+    </p>
+    <p>
+      To exercise any of these, email <a href="mailto:privacy@agentorist.com">privacy@agentorist.com</a>. Because most users never identify themselves to Agentorist directly, we may need to ask follow-up questions to locate the records you're asking about. We'll respond within 30 days.
+    </p>
+  </section>
+
+  <section>
+    <h3>Children</h3>
+    <p>
+      Agentorist isn't aimed at children under 13 (or under 16 where the GDPR applies). If you believe a child has provided us with their email address through a form, contact us and we'll delete it.
+    </p>
+  </section>
+
+  <section>
+    <h3>Changes to this policy</h3>
+    <p>
+      We'll update this page if how we handle data changes meaningfully. The "last updated" date at the top reflects the most recent change. If we make a material change that affects how data we already hold is used, we'll provide clearer notice — typically via email if we have one, or a prominent banner on this website.
+    </p>
+  </section>
+
+  <section>
+    <h3>Contact</h3>
+    <p>
+      Privacy questions, requests, and complaints: <a href="mailto:privacy@agentorist.com">privacy@agentorist.com</a><br>
+      Everything else: <a href="mailto:hello@agentorist.com">hello@agentorist.com</a>
+    </p>
+    <div class="callout" style="margin-top: 2rem;">
+      <span class="callout-icon">Note</span>
+      <p>This page is a plain-English summary of our practices, not a legal contract. If you're a legal professional reviewing this on behalf of a partner, please reach out and we'll send the version aligned with the framework you need (GDPR DPA, CCPA disclosures, etc.).</p>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="logo footer-logo"><svg aria-hidden="true"><use href="#agt-mark"/></svg>Agentorist</div>
+      <p class="footer-tagline">The AI-agent-native booking gateway. Search. Compare. Book. All from inside the conversation.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <a href="index.html#how">How it works</a>
+      <a href="index.html#verticals">What we book</a>
+      <a href="index.html#developers">For developers</a>
+    </div>
+    <div>
+      <h4>Partners</h4>
+      <a href="integrate.html">Integrate</a>
+      <a href="data-reports.html">Demand reports</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>© 2026 Agentorist</span>
+    <span>This product uses the TMDB API but is not endorsed or certified by TMDB.</span>
+  </div>
+</footer>
+
+</body>
+</html>
