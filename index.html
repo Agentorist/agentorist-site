@@ -713,6 +713,21 @@
     <button class="copy-btn" id="copyBtn" onclick="copyConfig()">Copy</button>
   </div>
 
+  <p style="margin-top: 1.5rem; margin-bottom: 0.5rem; max-width: 65ch;"><strong>Claude Desktop / Cursor</strong> — JSON config format, add to <code>mcpServers</code>:</p>
+  <div class="code-wrap">
+    <div class="code-block" id="claudeConfig">
+{
+  <span class="string">"mcpServers"</span>: {
+    <span class="string">"agentorist"</span>: {
+      <span class="string">"url"</span>: <span class="string">"https://mcp.agentorist.com/mcp"</span>,
+      <span class="string">"transport"</span>: <span class="string">"streamable-http"</span>
+    }
+  }
+}
+    </div>
+    <button class="copy-btn" onclick="copySnippet('claudeConfig', this)">Copy</button>
+  </div>
+
   <div class="cta-row">
     <a href="docs.html" class="btn btn-primary">Read the docs</a>
     <a href="/.well-known/mcp.json" class="btn">Discovery manifest</a>
@@ -759,6 +774,16 @@
       setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
     }).catch(() => {
       const btn = document.getElementById('copyBtn');
+      btn.textContent = 'Failed';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    });
+  }
+  function copySnippet(id, btn) {
+    const el = document.getElementById(id);
+    navigator.clipboard.writeText(el.innerText).then(() => {
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    }).catch(() => {
       btn.textContent = 'Failed';
       setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
     });
