@@ -37,6 +37,9 @@
     font-size: 1.05rem;
     color: var(--forest);
     font-weight: 600;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+    min-width: 0;
   }
   .client {
     border: 1px solid var(--line);
@@ -67,7 +70,9 @@
     border-radius: 6px;
     padding: 1.1rem 1.25rem;
     overflow-x: auto;
-    white-space: pre;
+    max-width: 100%;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
   .code-block .string { color: #7fbf9a; }
   .code-block .comment { color: #6b6258; }

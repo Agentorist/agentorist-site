@@ -323,3 +323,14 @@ footer .footer-tagline {
   footer .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
   footer .colophon { flex-direction: column; gap: 1rem; }
 }
+
+/* Overflow safety -------------------------------------------------- */
+/* Stops long URLs, file paths, code tokens and media from widening
+   the layout on narrow screens (the mobile horizontal-scroll bug).
+   Site-wide: applies to every page that links brand.css.            */
+html { overflow-x: hidden; }
+img, video, iframe { max-width: 100%; height: auto; }
+p, li, h1, h2, h3, h4, a, td, dd, figcaption, blockquote, .lede {
+  overflow-wrap: break-word;
+}
+code { overflow-wrap: anywhere; word-break: break-word; }
