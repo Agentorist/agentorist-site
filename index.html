@@ -250,7 +250,7 @@
 
   .verticals {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 0;
     border: 1px solid var(--line);
     margin-top: 3rem;
@@ -512,7 +512,8 @@
     .hero { padding: 3rem 1.5rem 2rem; }
     .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
     section { padding: 3rem 1.5rem; }
-    .strip, .two-col, .verticals, .mode-strip { grid-template-columns: 1fr; }
+    .strip, .two-col, .mode-strip { grid-template-columns: 1fr; }
+    .verticals { grid-template-columns: repeat(2, 1fr); }
     .strip-cell, .vertical-cell, .mode-cell { border-right: none; border-bottom: 1px solid var(--line); }
     .two-col > div:first-child { border-right: none; border-bottom: 1px solid var(--line); }
     .serial { display: none; }
@@ -640,7 +641,7 @@
   <div class="section-label">What we book</div>
   <h2>One layer. Anything that can be booked.</h2>
 
-  <div class="verticals" style="grid-template-columns: repeat(6, 1fr);">
+  <div class="verticals">
     <div class="vertical-cell live">
       <span class="icon">▲</span>
       <h4>Events</h4>
