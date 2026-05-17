@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agentorist — The Booking Layer for AI Agents</title>
-<meta name="description" content="The booking layer between AI agents and the world's booking economy. Movies, events, appointments, experiences — anything that can be booked, through one connection.">
-<meta property="og:title" content="Agentorist — The Booking Layer for AI Agents">
-<meta property="og:description" content="The booking layer between AI agents and the world's booking economy.">
+<title>Agentorist — The Trusted Booking Intermediary for the Agentic Economy</title>
+<meta name="description" content="The trusted booking intermediary for the Agentic economy. Search, discover, and book events, movies, hotels, and restaurants — all from inside the conversation with your AI.">
+<meta property="og:title" content="Agentorist — The Trusted Booking Intermediary for the Agentic Economy">
+<meta property="og:description" content="The trusted booking intermediary for the Agentic economy. Search, discover, and book — all from inside the conversation.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -551,6 +551,7 @@
     <a href="#modes">Discover · Route · Book</a>
     <a href="#verticals">What we book</a>
     <a href="#audiences">Audiences</a>
+    <a href="#trust">Trust &amp; Safety</a>
     <a href="#developers">Developers</a>
   </nav>
 </header>
@@ -566,12 +567,12 @@
     </div>
     <div>
       <p class="lead">
-        <strong>Working to bring seamless integrations to AI agents.</strong> Discovery, routing, and booking — all inside the conversation.
+        <strong>The trusted booking intermediary for the Agentic economy.</strong> Discovery, routing, and booking — all inside the conversation.
       </p>
       <div class="meta">
         <span>Built on Model Context Protocol</span>
         <span>Submitting to MCP registries</span>
-        <span>Compatible with Claude, ChatGPT, Gemini</span>
+        <span>Compatible with Claude, ChatGPT, Grok, Gemini</span>
       </div>
       <div class="cta-row">
         <a href="#developers" class="btn btn-primary">Connect to Agentorist</a>
@@ -678,7 +679,7 @@
     <div>
       <h3>Users</h3>
       <p>You don't install Agentorist. You don't sign up for Agentorist. You don't even need to know we exist.</p>
-      <p>You just talk to your AI assistant — Claude, ChatGPT, Gemini — the way you already do. When you ask it to find tickets, it finds us. When you ask it to book, we book.</p>
+      <p>You just talk to your AI assistant — Claude, ChatGPT, Grok, Gemini — the way you already do. When you ask it to find tickets, it finds us. When you ask it to book, we book.</p>
       <ul>
         <li>Search across thousands of venues in seconds</li>
         <li>No app, no signup, no password</li>
@@ -698,12 +699,53 @@
   </div>
 </section>
 
+<section id="trust">
+  <div class="section-label">Trust &amp; Safety</div>
+  <h2>A trusted intermediary, not an open door.</h2>
+
+  <p style="max-width: 65ch; margin-top: 1rem; margin-bottom: 2.5rem;">
+    When AI agents start booking on behalf of millions of people, new risks
+    appear — poisoned data hijacking the agent, scalper bots wearing AI masks,
+    scraping at machine speed, personal data leaking to places it shouldn't.
+    Agentorist runs a <strong>13-control trust stack across three layers</strong>
+    that protects our booking partners, the AI agents that connect to us, and
+    the people those agents act for.
+  </p>
+
+  <div class="mode-strip">
+    <div class="mode-cell">
+      <div class="mode-num">Layer 1 — Inbound</div>
+      <h3>We know who's calling.</h3>
+      <p>Every AI client is identified and rate-limited if necessary to prevent excessive API calling. Inbound queries are sanitised against potential prompt-injection before anything else happens.</p>
+    </div>
+    <div class="mode-cell">
+      <div class="mode-num">Layer 2 — Processing</div>
+      <h3>Nothing dirty gets through.</h3>
+      <p>Responses are sanitised, booking links whitelisted to verified partner domains, personal data filtered, scraping and low-intent bookings detected — every event audited.</p>
+    </div>
+    <div class="mode-cell">
+      <div class="mode-num">Layer 3 — Outbound</div>
+      <h3>A good citizen to partners.</h3>
+      <p>We self-throttle, never leak internal errors, and preserve every partner's tracking intact. Partners get clean, attributed, intent-verified traffic.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="callout-icon">Why</span>
+    <p>Booking platforms are right to be wary of anonymous AI traffic. We're the buffer that makes it safe to say yes — and a clear reason for partners to work with us rather than around us.</p>
+  </div>
+
+  <div class="cta-row">
+    <a href="security.html" class="btn btn-primary">How the trust stack works</a>
+  </div>
+</section>
+
 <section id="developers">
   <div class="section-label">For developers</div>
   <h2>One MCP endpoint. Everywhere agents look to book.</h2>
 
   <p style="max-width: 65ch; margin-top: 1rem;">
-    Agentorist is a Model Context Protocol server. Any MCP-compatible client — Claude Desktop, ChatGPT, Cursor, Gemini CLI, Cline — can connect and immediately gain seven new tools: <code>list_verticals</code>, <code>search</code>, <code>search_all</code>, <code>find_options</code>, <code>book</code>, <code>list_venues</code>, and <code>request_unsupported_booking</code>.
+    Agentorist is a Model Context Protocol server. Any MCP-compatible client — Claude Desktop, ChatGPT, Grok, Cursor, Gemini CLI, Cline — can connect and immediately gain seven new tools: <code>list_verticals</code>, <code>search</code>, <code>search_all</code>, <code>find_options</code>, <code>book</code>, <code>list_venues</code>, and <code>request_unsupported_booking</code>.
   </p>
 
   <div class="code-wrap">
@@ -713,23 +755,11 @@
     <button class="copy-btn" id="copyBtn" onclick="copyConfig()">Copy</button>
   </div>
 
-  <p style="margin-top: 1.5rem; margin-bottom: 0.5rem; max-width: 65ch;"><strong>Claude Desktop / Cursor</strong> — JSON config format, add to <code>mcpServers</code>:</p>
-  <div class="code-wrap">
-    <div class="code-block" id="claudeConfig">
-{
-  <span class="string">"mcpServers"</span>: {
-    <span class="string">"agentorist"</span>: {
-      <span class="string">"url"</span>: <span class="string">"https://mcp.agentorist.com/mcp"</span>,
-      <span class="string">"transport"</span>: <span class="string">"streamable-http"</span>
-    }
-  }
-}
-    </div>
-    <button class="copy-btn" onclick="copySnippet('claudeConfig', this)">Copy</button>
-  </div>
+  <p style="margin-top: 1.25rem; max-width: 65ch;">Client-specific setup (Grok, Claude Desktop, ChatGPT, Cursor and more) is on the <a href="connect.html">Connect page</a>.</p>
 
   <div class="cta-row">
-    <a href="docs.html" class="btn btn-primary">Read the docs</a>
+    <a href="connect.html" class="btn btn-primary">Connect your AI</a>
+    <a href="docs.html" class="btn">Read the docs</a>
     <a href="/.well-known/mcp.json" class="btn">Discovery manifest</a>
   </div>
 </section>
@@ -744,6 +774,7 @@
       <h4>Product</h4>
       <a href="#how">How it works</a>
       <a href="#verticals">What we book</a>
+      <a href="connect.html">Connect your AI</a>
       <a href="docs.html">Documentation</a>
     </div>
     <div>
@@ -751,6 +782,7 @@
       <a href="#audiences">For operators</a>
       <a href="integrate.html">Integrate</a>
       <a href="data-reports.html">Demand reports</a>
+      <a href="security.html">Trust &amp; Safety</a>
     </div>
     <div>
       <h4>Company</h4>
@@ -762,7 +794,7 @@
   </div>
   <div class="colophon">
     <span>© 2026 Agentorist</span>
-    <span>Built for the agentic era · MCP-native · Made with care</span>
+    <span>Built for the agentic era · MCP-native</span>
   </div>
 </footer>
 

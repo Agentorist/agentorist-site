@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust &amp; Safety — Agentorist</title>
+<meta name="description" content="The Agentorist trust stack: 13 controls across 3 layers that keep booking partners, AI agents, and the people they act for safe in the Agentic economy.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* Trust-stack specific — layer cards + control list. Scoped to this page. */
+  .layer {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    background: rgba(0,0,0,0.015);
+  }
+  .layer-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin-bottom: 0.5rem;
+  }
+  .layer h3 {
+    font-size: 1.6rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+  .layer > p { color: var(--muted); margin-bottom: 1.5rem; max-width: 70ch; }
+  .control {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    gap: 0.75rem;
+    padding: 0.9rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .control:first-of-type { border-top: none; }
+  .control .n {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--forest);
+    padding-top: 0.15rem;
+  }
+  .control h4 { font-size: 1rem; margin-bottom: 0.2rem; }
+  .control p { font-size: 0.95rem; color: var(--muted); margin: 0; }
+  .who {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--forest);
+    border: 1px solid var(--forest);
+    border-radius: 3px;
+    padding: 1px 6px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+  .protect-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+  }
+  .protect-card {
+    flex: 1;
+    min-width: 220px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+  .protect-card h4 { color: var(--forest); margin-bottom: 0.5rem; font-size: 1.1rem; }
+  .protect-card p { font-size: 0.95rem; color: var(--muted); margin: 0; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="agt-mark" viewBox="0 0 100 100">
+    <path fill="currentColor" d="M 50 10 L 63.6 42 L 96 50 L 70.4 58 L 78 76 L 64 76 L 50 56 L 36 76 L 22 76 L 29.6 58 L 4 50 L 36.4 42 Z"/>
+    <path fill="currentColor" d="M 28 44 L 72 44 L 72 56 L 28 56 Z"/>
+    <path fill="currentColor" d="M 47 68 L 53 68 L 50 84 Z"/>
+  </symbol>
+</svg>
+
+<header>
+  <a class="logo" href="index.html"><svg aria-hidden="true"><use href="#agt-mark"/></svg>Agentorist</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="integrate.html">Integrate</a>
+    <a href="data-reports.html">Demand Reports</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<div class="page-body">
+  <div class="section-label">Trust &amp; Safety</div>
+  <h1>The trust stack.<br><em>Thirteen controls. Three layers.</em></h1>
+  <p class="lede">
+    Agentorist is the trusted booking intermediary for the Agentic economy.
+    "Trusted" is not a slogan — it is engineered. Every request that flows
+    through us passes a three-layer trust stack designed to protect three
+    groups at once.
+  </p>
+
+  <div class="protect-row">
+    <div class="protect-card">
+      <h4>Booking partners</h4>
+      <p>From anonymous abuse, scraping, scalper bots, and the compliance overhead of AI traffic.</p>
+    </div>
+    <div class="protect-card">
+      <h4>AI agents</h4>
+      <p>From poisoned data that tries to hijack the model, and from being pointed at unsafe links.</p>
+    </div>
+    <div class="protect-card">
+      <h4>The people behind them</h4>
+      <p>From having their personal data leak to places it was never meant to go.</p>
+    </div>
+  </div>
+
+  <p>
+    Below is the full stack — every control, what it does, and who it
+    protects. Nothing here is theoretical. It runs on every call.
+  </p>
+
+  <!-- LAYER 1 -->
+  <div class="layer">
+    <div class="layer-tag">Layer 1 — Inbound defence</div>
+    <h3>Know who's calling. Qualify before you act.</h3>
+    <p>
+      Before any work happens, we establish who is on the other end and
+      whether this request is legitimate.
+    </p>
+
+    <div class="control">
+      <div class="n">01</div>
+      <div>
+        <h4>Client identification <span class="who">Partners</span></h4>
+        <p>Every AI client (Claude, Cursor, ChatGPT and others) is identified and attributed, so partners see clean traffic — not an anonymous flood.</p>
+      </div>
+    </div>
+    <div class="control">
+      <div class="n">02</div>
+      <div>
+        <h4>Rate limiting <span class="who">Partners</span></h4>
+        <p>Per-client request ceilings. A single agent — accidental or malicious — can never hammer a partner's API through us.</p>
+      </div>
+    </div>
+    <div class="control">
+      <div class="n">03</div>
+      <div>
+        <h4>Input sanitisation <span class="who">AI agents</span></h4>
+        <p>Inbound queries are stripped of prompt-injection patterns and hidden characters before they touch anything downstream.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYER 2 -->
+  <div class="layer">
+    <div class="layer-tag">Layer 2 — Processing &amp; internal safety</div>
+    <h3>Nothing dirty reaches the agent. Nothing private leaks out.</h3>
+    <p>
+      The middle layer is where most of the work happens — cleaning data in
+      both directions and recording everything for accountability.
+    </p>
+
+    <div class="control">
+      <div class="n">04</div>
+      <div>
+        <h4>Response sanitisation <span class="who">AI agents</span></h4>
+        <p>Data returned from partners is scrubbed of injection patterns before it reaches the AI — a compromised listing can't turn into an instruction.</p>
+      </div>
+    </div>
+    <div class="control">
+      <div class="n">05</div>
+      <div>
+        <h4>URL whitelisting <span class="who">AI agents · Users</span></h4>
+        <p>Booking links are only ever returned if they point at a verified partner domain. Phishing or hijacked URLs are rejected, not forwarded.</p>
+      </div>
+    </div>
+    <div class="control">
+      <div class="n">06</div>
+      <div>
+        <h4>Schema validation <span class="who">AI agents</span></h4>
+        <p>Every partner response is checked against an expected shape. Malformed or unexpected payloads are replaced with safe defaults rather than propagated.</p>
+      </div>
+    </div>
+    <div class="control">
+      <div class="n">07</div>
+      <div>
+        <h4>PII filtering <span class="who">Users · Partners</span></h4>
+        <p>Emails, phone numbers, addresses and card-shaped numbers are redacted from logs and from anything we forward. Partners get the booking, not a life history.</p>
+      </div>
+    </div>
+    <div class="control">
+      <div class="n">08</div>
+      <div>
+        <h4>Audit logging <span class="who">Partners · Users</span></h4>
+        <p>Every control firing is recorded in a structured, queryable trail — the basis for compliance answers and a live security dashboard.</p>
+      </div>
+    </div>
+    <div class="control">
+      <div class="n">09</div>
+      <div>
+        <h4>Scraping detection <span class="who">Partners</span></h4>
+        <p>Sequential-ID enumeration, geographic sweeps and burst traffic are detected and blocked before they reach a partner's inventory.</p>
+      </div>
+    </div>
+    <div class="control">
+      <div class="n">10</div>
+      <div>
+        <h4>Booking-intent verification <span class="who">Partners</span></h4>
+        <p>Bookings with no genuine discovery behind them — the signature of a scalper bot — are flagged or blocked. Real intent reaches the partner; bots don't.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYER 3 -->
+  <div class="layer">
+    <div class="layer-tag">Layer 3 — Outbound discipline</div>
+    <h3>Be a good citizen to every partner.</h3>
+    <p>
+      The final layer governs how we behave towards the platforms we book
+      with — because a trusted intermediary is judged by how it treats the
+      people it works with.
+    </p>
+
+    <div class="control">
+      <div class="n">11</div>
+      <div>
+        <h4>Error suppression <span class="who">Partners · Users</span></h4>
+        <p>Internal failures never leak as raw error text to a client — no detail that could be used for reconnaissance escapes.</p>
+      </div>
+    </div>
+    <div class="control">
+      <div class="n">12</div>
+      <div>
+        <h4>Self-throttling &amp; health back-off <span class="who">Partners</span></h4>
+        <p>If a partner starts returning errors, we automatically back off rather than pile on. We protect partner uptime as if it were our own.</p>
+      </div>
+    </div>
+    <div class="control">
+      <div class="n">13</div>
+      <div>
+        <h4>Attribution integrity <span class="who">Partners</span></h4>
+        <p>Every partner's tracking and affiliate identifiers survive intact end-to-end. Partners get full, accurate credit for the traffic we send.</p>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <h3>For partners evaluating us</h3>
+    <p>
+      If you operate a booking platform and want to understand exactly how
+      Agentorist protects your API surface before you integrate, we're happy
+      to walk through the stack in detail and answer a security
+      questionnaire: <a href="mailto:hello@agentorist.com">hello@agentorist.com</a>
+    </p>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="logo footer-logo"><svg aria-hidden="true"><use href="#agt-mark"/></svg>Agentorist</div>
+      <p class="footer-tagline">The trusted booking intermediary for the Agentic economy. Search. Discover. Book. All from inside the conversation.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <a href="index.html#how">How it works</a>
+      <a href="index.html#verticals">What we book</a>
+      <a href="docs.html">Documentation</a>
+    </div>
+    <div>
+      <h4>Partners</h4>
+      <a href="integrate.html">Integrate</a>
+      <a href="data-reports.html">Demand reports</a>
+      <a href="security.html">Trust &amp; Safety</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>© 2026 Agentorist</span>
+    <span>This product uses the TMDB API but is not endorsed or certified by TMDB.</span>
+  </div>
+</footer>
+
+</body>
+</html>

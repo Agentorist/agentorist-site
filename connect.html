@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect — Agentorist</title>
+<meta name="description" content="How to connect Agentorist to Grok, Claude, ChatGPT, Cursor, or any MCP client. One URL. Everywhere your AI works.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* Connect page — client cards, step lists, code blocks. Scoped here. */
+  .endpoint-banner {
+    border: 1px solid var(--forest);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0 2.5rem;
+    background: rgba(29,122,63,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .endpoint-banner .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+  }
+  .endpoint-banner .url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.05rem;
+    color: var(--forest);
+    font-weight: 600;
+  }
+  .client {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    background: rgba(0,0,0,0.015);
+  }
+  .client-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin-bottom: 0.4rem;
+  }
+  .client h3 { font-size: 1.6rem; font-style: italic; margin-bottom: 0.4rem; }
+  .client > p { color: var(--muted); margin-bottom: 1.25rem; max-width: 68ch; }
+  ol.steps { margin: 0 0 1rem 1.2rem; padding: 0; }
+  ol.steps li { margin: 0.5rem 0; line-height: 1.5; }
+  .code-wrap { position: relative; margin: 1rem 0; }
+  .code-block {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    background: var(--ink);
+    color: #d8d4ce;
+    border-radius: 6px;
+    padding: 1.1rem 1.25rem;
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .code-block .string { color: #7fbf9a; }
+  .code-block .comment { color: #6b6258; }
+  .copy-btn {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.08);
+    color: var(--paper);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+    padding: 4px 10px;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: rgba(255,255,255,0.15); }
+  .note {
+    font-size: 0.9rem;
+    color: var(--muted);
+    border-left: 2px solid var(--forest);
+    padding-left: 1rem;
+    margin: 1rem 0 0;
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="agt-mark" viewBox="0 0 100 100">
+    <path fill="currentColor" d="M 50 10 L 63.6 42 L 96 50 L 70.4 58 L 78 76 L 64 76 L 50 56 L 36 76 L 22 76 L 29.6 58 L 4 50 L 36.4 42 Z"/>
+    <path fill="currentColor" d="M 28 44 L 72 44 L 72 56 L 28 56 Z"/>
+    <path fill="currentColor" d="M 47 68 L 53 68 L 50 84 Z"/>
+  </symbol>
+</svg>
+
+<header>
+  <a class="logo" href="index.html"><svg aria-hidden="true"><use href="#agt-mark"/></svg>Agentorist</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="integrate.html">Integrate</a>
+    <a href="security.html">Trust &amp; Safety</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<div class="page-body">
+  <div class="section-label">Connect</div>
+  <h1>One URL.<br><em>Everywhere your AI works.</em></h1>
+  <p class="lede">
+    Agentorist is a hosted Model Context Protocol server. There's nothing to
+    install. Point any MCP-compatible AI client at the endpoint below and it
+    instantly gains the ability to search, discover, and book.
+  </p>
+
+  <div class="endpoint-banner">
+    <div>
+      <div class="lbl">Server endpoint · streamable-http</div>
+      <div class="url" id="endpoint">https://mcp.agentorist.com/mcp</div>
+    </div>
+    <button class="btn btn-primary" onclick="copyText('https://mcp.agentorist.com/mcp', this)">Copy URL</button>
+  </div>
+
+  <!-- GROK -->
+  <div class="client">
+    <div class="client-tag">Grok · xAI</div>
+    <h3>Grok</h3>
+    <p>Grok supports custom MCP servers directly in its Connectors panel — no config files, no plan restrictions.</p>
+    <ol class="steps">
+      <li>Go to <strong>grok.com/connectors</strong> (web, iOS, or Android)</li>
+      <li>Click <strong>New Connector</strong></li>
+      <li>Select <strong>Custom</strong></li>
+      <li>Paste the server URL below and confirm</li>
+    </ol>
+    <div class="code-wrap">
+      <div class="code-block" id="grokUrl">https://mcp.agentorist.com/mcp</div>
+      <button class="copy-btn" onclick="copyEl('grokUrl', this)">Copy</button>
+    </div>
+    <p class="note">Then just ask Grok: <em>"What's on in Boston this weekend?"</em></p>
+  </div>
+
+  <!-- CLAUDE -->
+  <div class="client">
+    <div class="client-tag">Claude · Anthropic</div>
+    <h3>Claude Desktop</h3>
+    <p>Two ways — the Connectors UI (easiest) or the config file (always works).</p>
+    <ol class="steps">
+      <li><strong>Via UI:</strong> Settings → Connectors → Add custom connector → paste the URL</li>
+      <li><strong>Via config file:</strong> edit <code>claude_desktop_config.json</code> (see below), then quit and reopen Claude</li>
+    </ol>
+    <div class="code-wrap">
+      <div class="code-block" id="claudeCfg">{
+  <span class="string">"mcpServers"</span>: {
+    <span class="string">"agentorist"</span>: {
+      <span class="string">"url"</span>: <span class="string">"https://mcp.agentorist.com/mcp"</span>
+    }
+  }
+}</div>
+      <button class="copy-btn" onclick="copyEl('claudeCfg', this)">Copy</button>
+    </div>
+    <p class="note">Config file location (macOS): <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></p>
+  </div>
+
+  <!-- CHATGPT -->
+  <div class="client">
+    <div class="client-tag">ChatGPT · OpenAI</div>
+    <h3>ChatGPT</h3>
+    <p>ChatGPT connects to remote MCP servers via Developer Mode (available on Plus, Pro, Team, Enterprise, and Edu plans).</p>
+    <ol class="steps">
+      <li>Settings → <strong>Apps &amp; Connectors</strong> → Advanced settings → toggle <strong>Developer Mode</strong> on</li>
+      <li>Settings → Apps &amp; Connectors → <strong>Add new connector</strong></li>
+      <li>Name it <strong>Agentorist</strong>, add a short description</li>
+      <li>Paste the MCP server URL below</li>
+      <li>Authentication: <strong>None</strong> — Agentorist needs no login</li>
+    </ol>
+    <div class="code-wrap">
+      <div class="code-block" id="gptUrl">https://mcp.agentorist.com/mcp</div>
+      <button class="copy-btn" onclick="copyEl('gptUrl', this)">Copy</button>
+    </div>
+    <p class="note">ChatGPT only supports remote HTTPS MCP servers — which is exactly what Agentorist is.</p>
+  </div>
+
+  <!-- CURSOR -->
+  <div class="client">
+    <div class="client-tag">Cursor</div>
+    <h3>Cursor</h3>
+    <p>Add Agentorist globally (all projects) or per-project via an <code>mcp.json</code> file.</p>
+    <ol class="steps">
+      <li>Create <code>~/.cursor/mcp.json</code> (global) <em>or</em> <code>.cursor/mcp.json</code> in your project</li>
+      <li>Add the config below</li>
+      <li>Settings (⌘⇧J) → Features → Model Context Protocol → confirm it's enabled</li>
+    </ol>
+    <div class="code-wrap">
+      <div class="code-block" id="cursorCfg">{
+  <span class="string">"mcpServers"</span>: {
+    <span class="string">"agentorist"</span>: {
+      <span class="string">"url"</span>: <span class="string">"https://mcp.agentorist.com/mcp"</span>,
+      <span class="string">"transport"</span>: <span class="string">"streamable-http"</span>
+    }
+  }
+}</div>
+      <button class="copy-btn" onclick="copyEl('cursorCfg', this)">Copy</button>
+    </div>
+  </div>
+
+  <!-- GENERIC -->
+  <div class="client">
+    <div class="client-tag">Any MCP client</div>
+    <h3>Everything else</h3>
+    <p>Cline, Continue, Gemini CLI, Windsurf, or any client that speaks the Model Context Protocol — point it at the same endpoint.</p>
+    <div class="code-wrap">
+      <div class="code-block" id="genericUrl">https://mcp.agentorist.com/mcp
+<span class="comment">Transport: streamable-http · No authentication required</span></div>
+      <button class="copy-btn" onclick="copyEl('genericUrl', this)">Copy</button>
+    </div>
+    <p class="note">Need the discovery manifest? <a href="/.well-known/mcp.json">/.well-known/mcp.json</a></p>
+  </div>
+
+  <section>
+    <h3>What you get</h3>
+    <p>
+      Once connected, your AI gains seven tools — <code>list_verticals</code>,
+      <code>search</code>, <code>search_all</code>, <code>find_options</code>,
+      <code>book</code>, <code>list_venues</code>, and
+      <code>request_unsupported_booking</code>. You never call these directly;
+      just ask your AI in plain language and it does the rest.
+    </p>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="logo footer-logo"><svg aria-hidden="true"><use href="#agt-mark"/></svg>Agentorist</div>
+      <p class="footer-tagline">The trusted booking intermediary for the Agentic economy. Search. Discover. Book. All from inside the conversation.</p>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <a href="index.html#how">How it works</a>
+      <a href="index.html#verticals">What we book</a>
+      <a href="docs.html">Documentation</a>
+    </div>
+    <div>
+      <h4>Partners</h4>
+      <a href="integrate.html">Integrate</a>
+      <a href="data-reports.html">Demand reports</a>
+      <a href="security.html">Trust &amp; Safety</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>© 2026 Agentorist</span>
+    <span>Built for the agentic era · MCP-native</span>
+  </div>
+</footer>
+
+<script>
+  function copyText(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 2000);
+    });
+  }
+  function copyEl(id, btn) {
+    const el = document.getElementById(id);
+    navigator.clipboard.writeText(el.innerText).then(() => {
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
