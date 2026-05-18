@@ -117,7 +117,7 @@
 
   <section>
     <h3>Quick start</h3>
-    <p>Add Agentorist to your MCP client config. No API key required to start — authenticated booking requires OAuth (see below).</p>
+    <p>Add Agentorist to your MCP client config. No API key, no token, no authentication — connect and go.</p>
 
     <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong>Server URL</strong> — works with any MCP-compatible client (Claude Desktop, Cursor, Cline, Gemini CLI, and others):</p>
     <div class="code-wrap">
@@ -139,6 +139,8 @@
 }</div>
       <button class="copy-btn" onclick="copySnippet('claudeConfig', this)">Copy</button>
     </div>
+
+    <p style="margin-top: 2rem;">Using Grok, ChatGPT, or another client? Step-by-step setup for each is on the <a href="connect.html">Connect page</a>.</p>
   </section>
 
   <section>
@@ -164,7 +166,7 @@
       </div>
       <div class="tool-row">
         <div class="tool-name">book</div>
-        <div class="tool-desc">Completes a booking inline where the partner supports it. Returns a confirmation number and ticket details. Requires OAuth.</div>
+        <div class="tool-desc">Initiates the booking and returns a ready-to-complete hand-off to the partner's own checkout (e.g. Ticketmaster), with the item already selected. The user completes payment on the partner's site. No authentication required.</div>
       </div>
       <div class="tool-row">
         <div class="tool-name">list_venues</div>
@@ -180,31 +182,17 @@
   <section>
     <h3>Authentication</h3>
     <p>
-      Search and discovery tools (<code>list_verticals</code>, <code>search</code>, <code>search_all</code>, <code>find_options</code>, <code>list_venues</code>, <code>request_unsupported_booking</code>) work without authentication.
+      None. Every tool — search, discovery and booking — works without an API key, token or OAuth flow. Connect the server and your agent can use it immediately.
     </p>
     <p>
-      The <code>book</code> tool requires an OAuth 2.0 token with the <code>book:tickets</code> scope. Agentorist uses the standard OAuth 2.0 authorization code flow:
-    </p>
-    <div class="code-block">
-<span class="comment"># Authorization endpoint</span>
-<span class="string">https://agentorist.com/oauth/authorize</span>
-
-<span class="comment"># Token endpoint</span>
-<span class="string">https://agentorist.com/oauth/token</span>
-
-<span class="comment"># Required scopes</span>
-read:listings   <span class="comment"># search and discovery</span>
-book:tickets    <span class="comment"># completing bookings</span>
-    </div>
-    <p style="margin-top: 1.5rem;">
-      OAuth credentials are available to registered partners. <a href="contact.html">Contact us</a> to get set up.
+      The <code>book</code> tool never takes payment or holds credentials. It returns a hand-off to the partner's own checkout (e.g. Ticketmaster), where the user completes the purchase under that partner's account and security. Agentorist never sees card or login details.
     </p>
   </section>
 
   <section>
     <h3>Discovery manifest</h3>
     <p>
-      The machine-readable server card is available at <code>/.well-known/mcp.json</code>. It describes the server, its transport, capabilities, and OAuth endpoints in the MCP 2026-01 server card format.
+      The machine-readable server card is available at <code>/.well-known/mcp.json</code>. It describes the server, its transport and capabilities in the MCP 2026-01 server card format.
     </p>
     <div class="cta-row">
       <a href="/.well-known/mcp.json" class="btn">View mcp.json</a>
