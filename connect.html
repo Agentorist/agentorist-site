@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Connect — Agentorist</title>
-<meta name="description" content="How to connect Agentorist to Grok, Claude, ChatGPT, Cursor, or any MCP client. One URL. Everywhere your AI works.">
+<meta name="description" content="How to connect Agentorist to Grok, Claude, ChatGPT, Gemini, Cursor, VS Code, or any MCP client. One-click install where supported. One URL.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,6 +99,57 @@
     padding-left: 1rem;
     margin: 1rem 0 0;
   }
+  /* Quick-install button + manual fallback divider */
+  .quick-install {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0.5rem 0 0;
+  }
+  .btn-quickinstall {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.85rem 1.5rem;
+    background: var(--forest);
+    color: var(--paper);
+    border: 1px solid var(--forest);
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1;
+  }
+  .btn-quickinstall:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+  .btn-quickinstall .icon { font-size: 14px; line-height: 1; }
+  .manual-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .manual-divider::before,
+  .manual-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+    opacity: 0.35;
+  }
 </style>
 </head>
 <body>
@@ -143,6 +194,12 @@
     <div class="client-tag">Grok · xAI</div>
     <h3>Grok</h3>
     <p>Grok supports custom MCP servers directly in its Connectors panel — no config files, no plan restrictions.</p>
+    <div class="quick-install">
+      <a class="btn-quickinstall" href="https://grok.com/connectors" target="_blank" rel="noopener">
+        <span class="icon">→</span> Open Grok Connectors
+      </a>
+    </div>
+    <div class="manual-divider">Or set up manually</div>
     <ol class="steps">
       <li>Go to <strong>grok.com/connectors</strong> (web, iOS, or Android)</li>
       <li>Click <strong>New Connector</strong></li>
@@ -161,6 +218,12 @@
     <div class="client-tag">Claude · Anthropic</div>
     <h3>Claude Desktop</h3>
     <p>Two ways — the Connectors UI (easiest) or the config file (always works).</p>
+    <div class="quick-install">
+      <button class="btn-quickinstall" onclick="copyClaudeConfig(this)">
+        <span class="icon">⧉</span> Copy Claude config
+      </button>
+    </div>
+    <div class="manual-divider">Or set up manually</div>
     <ol class="steps">
       <li><strong>Via UI:</strong> Settings → Connectors → Add custom connector → paste the URL</li>
       <li><strong>Via config file:</strong> edit <code>claude_desktop_config.json</code> (see below), then quit and reopen Claude</li>
@@ -183,6 +246,12 @@
     <div class="client-tag">ChatGPT · OpenAI</div>
     <h3>ChatGPT</h3>
     <p>ChatGPT connects to remote MCP servers via Developer Mode (available on Plus, Pro, Team, Enterprise, and Edu plans).</p>
+    <div class="quick-install">
+      <a class="btn-quickinstall" href="https://chatgpt.com/" target="_blank" rel="noopener">
+        <span class="icon">→</span> Open ChatGPT
+      </a>
+    </div>
+    <div class="manual-divider">Or set up manually</div>
     <ol class="steps">
       <li>Settings → <strong>Apps &amp; Connectors</strong> → Advanced settings → toggle <strong>Developer Mode</strong> on</li>
       <li>Settings → Apps &amp; Connectors → <strong>Add new connector</strong></li>
@@ -197,11 +266,42 @@
     <p class="note">ChatGPT only supports remote HTTPS MCP servers — which is exactly what Agentorist is.</p>
   </div>
 
+  <!-- GEMINI -->
+  <div class="client">
+    <div class="client-tag">Gemini · Google</div>
+    <h3>Gemini</h3>
+    <p>Gemini CLI supports MCP today via a config file. MCP support in the consumer Gemini app hasn't shipped yet — we'll update this the moment it does.</p>
+    <div class="manual-divider">Gemini CLI setup</div>
+    <ol class="steps">
+      <li>Open (or create) <code>~/.gemini/settings.json</code></li>
+      <li>Add the config below under <code>mcpServers</code></li>
+      <li>Restart Gemini CLI — Agentorist's tools become available</li>
+    </ol>
+    <div class="code-wrap">
+      <div class="code-block" id="geminiCfg">{
+  <span class="string">"mcpServers"</span>: {
+    <span class="string">"agentorist"</span>: {
+      <span class="string">"httpUrl"</span>: <span class="string">"https://mcp.agentorist.com/mcp"</span>
+    }
+  }
+}</div>
+      <button class="copy-btn" onclick="copyEl('geminiCfg', this)">Copy</button>
+    </div>
+    <p class="note">Using the consumer Gemini app instead? MCP connector support is on Google's roadmap but not live yet — Gemini CLI is the way in for now.</p>
+  </div>
+
   <!-- CURSOR -->
   <div class="client">
     <div class="client-tag">Cursor</div>
     <h3>Cursor</h3>
     <p>Add Agentorist globally (all projects) or per-project via an <code>mcp.json</code> file.</p>
+    <div class="quick-install">
+      <a class="btn-quickinstall" href="cursor://anysphere.cursor-deeplink/mcp/install?name=agentorist&amp;config=eyJ1cmwiOiAiaHR0cHM6Ly9tY3AuYWdlbnRvcmlzdC5jb20vbWNwIn0=">
+        <span class="icon">⚡</span> Install in Cursor
+      </a>
+    </div>
+    <p class="note">One click — Cursor opens with the install dialog pre-filled. Confirm and Agentorist is connected.</p>
+    <div class="manual-divider">Or set up manually</div>
     <ol class="steps">
       <li>Create <code>~/.cursor/mcp.json</code> (global) <em>or</em> <code>.cursor/mcp.json</code> in your project</li>
       <li>Add the config below</li>
@@ -218,6 +318,19 @@
 }</div>
       <button class="copy-btn" onclick="copyEl('cursorCfg', this)">Copy</button>
     </div>
+  </div>
+
+  <!-- VS CODE -->
+  <div class="client">
+    <div class="client-tag">VS Code · GitHub Copilot / Cline / Continue</div>
+    <h3>VS Code</h3>
+    <p>For developers using Copilot agent mode or any MCP-capable extension (Cline, Continue) inside Visual Studio Code.</p>
+    <div class="quick-install">
+      <a class="btn-quickinstall" href='vscode:mcp/install?%7B%22name%22%3A%22agentorist%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.agentorist.com%2Fmcp%22%7D'>
+        <span class="icon">⚡</span> Install in VS Code
+      </a>
+    </div>
+    <p class="note">One click — VS Code opens with a pre-filled install dialog. Once added, any AI assistant inside VS Code that speaks MCP can use Agentorist.</p>
   </div>
 
   <!-- GENERIC -->
@@ -292,6 +405,20 @@
     navigator.clipboard.writeText(el.innerText).then(() => {
       btn.textContent = 'Copied!';
       setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    });
+  }
+  function copyClaudeConfig(btn) {
+    const cfg = `{
+  "mcpServers": {
+    "agentorist": {
+      "url": "https://mcp.agentorist.com/mcp"
+    }
+  }
+}`;
+    navigator.clipboard.writeText(cfg).then(() => {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<span class="icon">✓</span> Copied — paste into config';
+      setTimeout(() => { btn.innerHTML = orig; }, 2500);
     });
   }
 </script>
