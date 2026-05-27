@@ -236,21 +236,32 @@
     <p class="note">Requires a paid Claude plan (Pro, Team, or Enterprise). Then just ask: <em>"What's on in Boston this weekend?"</em></p>
   </div>
 
-  <!-- CLAUDE -->
+  <!-- CLAUDE DESKTOP -->
   <div class="client">
-    <div class="client-tag">Claude · Anthropic</div>
+    <div class="client-tag">Claude Desktop · Anthropic</div>
     <h3>Claude Desktop</h3>
-    <p>Two ways — the Connectors UI (easiest) or the config file (always works).</p>
+    <p>Two ways in — the easy Connectors UI (paid plans), or a config file that works on <strong>any</strong> plan, including free.</p>
+
+    <div class="manual-divider">The easy way · paid plans</div>
+    <ol class="steps">
+      <li>Settings → <strong>Connectors</strong> → <strong>Add custom connector</strong></li>
+      <li>Paste the server URL below and confirm</li>
+    </ol>
+    <div class="code-wrap">
+      <div class="code-block" id="claudeDeskUrl">https://mcp.agentorist.com/mcp</div>
+      <button class="copy-btn" onclick="copyEl('claudeDeskUrl', this)">Copy</button>
+    </div>
+
+    <div class="manual-divider">Config file · works for everyone (incl. free)</div>
+    <ol class="steps">
+      <li>Open (or create) <code>claude_desktop_config.json</code></li>
+      <li>Add the block below, then quit and reopen Claude</li>
+    </ol>
     <div class="quick-install">
       <button class="btn-quickinstall" onclick="copyClaudeConfig(this)">
         <span class="icon">⧉</span> Copy Claude config
       </button>
     </div>
-    <div class="manual-divider">Or set up manually</div>
-    <ol class="steps">
-      <li><strong>Via UI:</strong> Settings → Connectors → Add custom connector → paste the URL</li>
-      <li><strong>Via config file:</strong> edit <code>claude_desktop_config.json</code> (see below), then quit and reopen Claude</li>
-    </ol>
     <div class="code-wrap">
       <div class="code-block" id="claudeCfg">{
   <span class="string">"mcpServers"</span>: {
