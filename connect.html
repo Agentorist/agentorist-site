@@ -99,6 +99,54 @@
     padding-left: 1rem;
     margin: 1rem 0 0;
   }
+  /* Conversation-starter prompts (Personal / Business per client card) */
+  .prompts {
+    margin: 1.5rem 0 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+  .prompts-heading {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+  .prompts-intro {
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    max-width: 60ch;
+  }
+  .prompt-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--paper-2, #f5f3ee);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+  }
+  .prompt-row .prompt-label {
+    flex: 1;
+    font-size: 0.95rem;
+  }
+  .prompt-row .prompt-label strong { color: var(--ink); }
+  .prompt-row .prompt-label span { color: var(--muted); margin-left: 0.5rem; }
+  .prompt-row button {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: #d8d4ce;
+    border: none;
+    padding: 0.5rem 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .prompt-row button:hover { background: var(--forest); color: white; }
   /* Quick-install button + manual fallback divider */
   .quick-install {
     display: flex;
@@ -210,6 +258,18 @@
       <div class="code-block" id="grokUrl">https://mcp.agentorist.com/mcp</div>
       <button class="copy-btn" onclick="copyEl('grokUrl', this)">Copy</button>
     </div>
+    <div class="prompts">
+      <div class="prompts-heading">Start your conversation here</div>
+      <p class="prompts-intro">After connecting, paste one of these into a new chat for best results.</p>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For personal use</strong><span>your own trips and plans</span></div>
+        <button onclick="copyPrompt('personal', this)">Copy</button>
+      </div>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For business / agency use</strong><span>travel operators, automations</span></div>
+        <button onclick="copyPrompt('business', this)">Copy</button>
+      </div>
+    </div>
     <p class="note">Then just ask Grok: <em>"What's on in Boston this weekend?"</em></p>
   </div>
 
@@ -232,6 +292,18 @@
     <div class="code-wrap">
       <div class="code-block" id="claudeWebUrl">https://mcp.agentorist.com/mcp</div>
       <button class="copy-btn" onclick="copyEl('claudeWebUrl', this)">Copy</button>
+    </div>
+    <div class="prompts">
+      <div class="prompts-heading">Start your conversation here</div>
+      <p class="prompts-intro">After connecting, paste one of these into a new chat for best results.</p>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For personal use</strong><span>your own trips and plans</span></div>
+        <button onclick="copyPrompt('personal', this)">Copy</button>
+      </div>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For business / agency use</strong><span>travel operators, automations</span></div>
+        <button onclick="copyPrompt('business', this)">Copy</button>
+      </div>
     </div>
     <p class="note">Requires a paid Claude plan (Pro, Team, or Enterprise). Then just ask: <em>"What's on in Boston this weekend?"</em></p>
   </div>
@@ -272,6 +344,18 @@
 }</div>
       <button class="copy-btn" onclick="copyEl('claudeCfg', this)">Copy</button>
     </div>
+    <div class="prompts">
+      <div class="prompts-heading">Start your conversation here</div>
+      <p class="prompts-intro">After connecting, paste one of these into a new chat for best results.</p>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For personal use</strong><span>your own trips and plans</span></div>
+        <button onclick="copyPrompt('personal', this)">Copy</button>
+      </div>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For business / agency use</strong><span>travel operators, automations</span></div>
+        <button onclick="copyPrompt('business', this)">Copy</button>
+      </div>
+    </div>
     <p class="note">Config file location (macOS): <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></p>
   </div>
 
@@ -297,6 +381,18 @@
       <div class="code-block" id="gptUrl">https://mcp.agentorist.com/mcp</div>
       <button class="copy-btn" onclick="copyEl('gptUrl', this)">Copy</button>
     </div>
+    <div class="prompts">
+      <div class="prompts-heading">Start your conversation here</div>
+      <p class="prompts-intro">After connecting, paste one of these into a new chat for best results.</p>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For personal use</strong><span>your own trips and plans</span></div>
+        <button onclick="copyPrompt('personal', this)">Copy</button>
+      </div>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For business / agency use</strong><span>travel operators, automations</span></div>
+        <button onclick="copyPrompt('business', this)">Copy</button>
+      </div>
+    </div>
     <p class="note">ChatGPT only supports remote HTTPS MCP servers — which is exactly what Agentorist is.</p>
   </div>
 
@@ -321,6 +417,18 @@
 }</div>
       <button class="copy-btn" onclick="copyEl('geminiCfg', this)">Copy</button>
     </div>
+    <div class="prompts">
+      <div class="prompts-heading">Start your conversation here</div>
+      <p class="prompts-intro">After connecting, paste one of these into a new chat for best results.</p>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For personal use</strong><span>your own trips and plans</span></div>
+        <button onclick="copyPrompt('personal', this)">Copy</button>
+      </div>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For business / agency use</strong><span>travel operators, automations</span></div>
+        <button onclick="copyPrompt('business', this)">Copy</button>
+      </div>
+    </div>
     <p class="note">Using the consumer Gemini app instead? MCP connector support is on Google's roadmap but not live yet — Gemini CLI is the way in for now.</p>
   </div>
 
@@ -333,6 +441,18 @@
       <a class="btn-quickinstall" href="cursor://anysphere.cursor-deeplink/mcp/install?name=agentorist&amp;config=eyJ1cmwiOiAiaHR0cHM6Ly9tY3AuYWdlbnRvcmlzdC5jb20vbWNwIn0=">
         <span class="icon">⚡</span> Install in Cursor
       </a>
+    </div>
+    <div class="prompts">
+      <div class="prompts-heading">Start your conversation here</div>
+      <p class="prompts-intro">After connecting, paste one of these into a new chat for best results.</p>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For personal use</strong><span>your own trips and plans</span></div>
+        <button onclick="copyPrompt('personal', this)">Copy</button>
+      </div>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For business / agency use</strong><span>travel operators, automations</span></div>
+        <button onclick="copyPrompt('business', this)">Copy</button>
+      </div>
     </div>
     <p class="note">One click — Cursor opens with the install dialog pre-filled. Confirm and Agentorist is connected.</p>
     <div class="manual-divider">Or set up manually</div>
@@ -364,6 +484,18 @@
         <span class="icon">⚡</span> Install in VS Code
       </a>
     </div>
+    <div class="prompts">
+      <div class="prompts-heading">Start your conversation here</div>
+      <p class="prompts-intro">After connecting, paste one of these into a new chat for best results.</p>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For personal use</strong><span>your own trips and plans</span></div>
+        <button onclick="copyPrompt('personal', this)">Copy</button>
+      </div>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For business / agency use</strong><span>travel operators, automations</span></div>
+        <button onclick="copyPrompt('business', this)">Copy</button>
+      </div>
+    </div>
     <p class="note">One click — VS Code opens with a pre-filled install dialog. Once added, any AI assistant inside VS Code that speaks MCP can use Agentorist.</p>
   </div>
 
@@ -376,6 +508,18 @@
       <div class="code-block" id="genericUrl">https://mcp.agentorist.com/mcp
 <span class="comment">Transport: streamable-http · No authentication required</span></div>
       <button class="copy-btn" onclick="copyEl('genericUrl', this)">Copy</button>
+    </div>
+    <div class="prompts">
+      <div class="prompts-heading">Start your conversation here</div>
+      <p class="prompts-intro">After connecting, paste one of these into a new chat for best results.</p>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For personal use</strong><span>your own trips and plans</span></div>
+        <button onclick="copyPrompt('personal', this)">Copy</button>
+      </div>
+      <div class="prompt-row">
+        <div class="prompt-label"><strong>For business / agency use</strong><span>travel operators, automations</span></div>
+        <button onclick="copyPrompt('business', this)">Copy</button>
+      </div>
     </div>
     <p class="note">Need the discovery manifest? <a href="/.well-known/mcp.json">/.well-known/mcp.json</a></p>
   </div>
@@ -427,6 +571,38 @@
 </footer>
 
 <script>
+  // ── Conversation-starter prompts ──────────────────────────────
+  // Identical text shown in every client card. Defined once here
+  // so updates flow through every box automatically.
+  const PROMPTS = {
+    personal: `You have access to Agentorist, a booking tool for hotels, cars, events, restaurants, tours, films, and anything else bookable. For any of those questions in this conversation:
+
+- Use Agentorist as the source of truth. Don't make up hotel names, prices, or availability from memory.
+- When Agentorist returns results, show me all the booking links inline — don't make me ask twice.
+- Include the thumbnail_markdown from each result so I can see photos.
+- Pay attention to audience_hint on suggested add-ons — only show me ones that fit me.
+- If Agentorist returns empty, say so plainly. The fallback link is still useful — surface it.
+- Some categories aren't fully bookable yet (e.g. restaurants, films) — show me the info Agentorist returns anyway. The details (address, hours, ratings, showtimes) are useful even without a booking button.
+- Keep responses concise. Skip the "I searched X then synthesized Y" meta-commentary — just give me the results and a short summary.`,
+
+    business: `You're connecting Agentorist (MCP booking gateway) into a workflow handling hotels, cars, events, dining, tours, and films. For every relevant query:
+
+- Call Agentorist tools (search, find_options, book, list_venues) — never fabricate inventory.
+- Pass agent_client on every call (format: business-name/version) so traffic is attributed.
+- Return full result fields (name, rating, price, address, booking_url, partner) rather than summaries — your downstream consumer needs the structured data.
+- Surface affiliate_disclosure and partner_url_note when present.
+- On rate_limited responses, use the stamped fallback_url and flag the cap.
+- Some verticals return informational data rather than bookable inventory (e.g. restaurants are Google Places metadata, no live booking). Pass the payload through — your downstream may handle the next step via other channels.
+- Preserve thumbnail_markdown for downstream rendering.`,
+  };
+  function copyPrompt(key, btn) {
+    navigator.clipboard.writeText(PROMPTS[key]).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 2000);
+    });
+  }
+
   function copyText(text, btn) {
     navigator.clipboard.writeText(text).then(() => {
       const orig = btn.textContent;
